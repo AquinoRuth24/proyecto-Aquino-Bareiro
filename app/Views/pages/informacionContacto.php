@@ -43,7 +43,7 @@
                         <li>📧Email: <a href="mailto:andres.bareiro@outlook.com">andres.bareiro@outlook.com</a></li>
                         <li style="margin-top: 1rem;">Contacto: Aquino Ruth:</li>
                         <li style="padding-left: 2rem;"><img src="public/assets/img/logoWpp.jpg" alt="Whatsapp" height="40">: <a href="tel:+54 9 379 480-0790">+54 9 379 480-0790</a></li>
-                        <li>📧Email: <a href="mailto:ruth.aquino@outlook.com">ruth.aquino@outlook.com</a></li>
+                        <li>📧Email: <a href="mailto:ruth.aquino@outlook.com">aquinoruth2004@gmail.com</a></li>
                     </ul>
                 </div>
             </div>
