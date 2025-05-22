@@ -39,7 +39,7 @@ class Home extends BaseController
             'content' => view('pages/terminosYUsos')
         ]);
     }
-    /*
+    
     public function catalogoDeProducto(): string
     {
         return view('templates/main-layout', [
@@ -54,7 +54,7 @@ class Home extends BaseController
             'content' => view('pages/consultas')
         ]);
     }
-*/
+
     public function enviarConsulta()
     {
         $nombre = $this->request->getPost('nombre');
