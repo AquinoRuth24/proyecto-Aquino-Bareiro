@@ -7,9 +7,6 @@
 
             <!-- Logo + Redes -->
             <div class="col-md-3 mb-4">
-                <h5 class="mb-3">
-                    🌲 forest.ai
-                </h5>
                 <div class="d-flex gap-2">
                     <a href="#" class="text-white"><i class="bi bi-twitter-x"></i></a>
                     <a href="#" class="text-white"><i class="bi bi-discord"></i></a>
