@@ -199,4 +199,13 @@ class App extends BaseConfig
      * @see http://www.w3.org/TR/CSP/
      */
     public bool $CSPEnabled = false;
+
+        /**
+     * --------------------------------------------------------------------------
+     * Session Save Path
+     * --------------------------------------------------------------------------
+     * Path where session files should be saved if using 'Files' handler.
+     */
+    public string $sessionSavePath = WRITEPATH . 'session';
+
 }
