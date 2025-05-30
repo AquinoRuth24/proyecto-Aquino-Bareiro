@@ -40,14 +40,14 @@ class Home extends BaseController
         ]);
     }
     
-    public function catalogoDeProducto(): string
+    public function catalogoProductos(): string
     {
         return view('templates/main-layout', [
             'title' => 'Catalogo de Productos - Yesi Yohi Store',
-            'content' => view('pages/catalogoProductos ')
+            'content' => view('pages/catalogoProductos')
         ]);
     }
-    public function consulta(): string
+    public function consultas(): string
     {
         return view('templates/main-layout', [
             'title' => 'Consultas-Yesi Yohi Store',

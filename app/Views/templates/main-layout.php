@@ -7,6 +7,7 @@
         <title><?= $title ?></title>
         <link href="public/assets/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="public/assets/css/miestilo.css">
+        
     </head>
 
     <body>
