@@ -1,4 +1,18 @@
+/* Sticky Footer Layout */
+html, body {
+    height: 100%;
+    margin: 0;
+}
 
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
   /* HERO SECTION */
 .hero {
     background-color: rgb(223, 142, 20);
@@ -21,9 +35,8 @@
     text-align: center;
     padding: 1rem;
     font-size: 1rem;
+
 }
 .formulario{
     background-color: #7a7a7a;
 }
-
-
