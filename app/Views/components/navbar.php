@@ -45,6 +45,20 @@ $actualMethod = service('router')->methodName();
                         href="<?= base_url('consultas') ?>">Consultas</a>
                 </li>
             </ul>
+
+            <!-- Íconos de usuario y carrito -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="<?= base_url('carrito') ?>">
+                        <i class="bi bi-cart-fill"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="<?= base_url('login') ?>">
+                        <i class="bi bi-person-circle"></i>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>
