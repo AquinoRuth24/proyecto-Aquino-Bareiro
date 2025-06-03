@@ -54,7 +54,20 @@ class Home extends BaseController
             'content' => view('pages/consultas')
         ]);
     }
-
+public function carrito(): string
+{
+    return view('templates/main-layout', [
+        'title' => 'Mi Carrito - Yesi Yohi Store',
+        'content' => view('pages/carrito')
+    ]);
+}
+public function login(): string
+{
+    return view('templates/main-layout', [
+        'title' => 'Inicio Secion- Yesi Yohi Store',
+        'content' => view('pages/login')
+    ]);
+}
     public function enviarConsulta()
     {
         $nombre = $this->request->getPost('nombre');

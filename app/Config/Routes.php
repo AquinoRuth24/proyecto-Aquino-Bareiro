@@ -12,5 +12,6 @@ $routes->get('/informacionContacto', 'Home::informacionContacto');
 $routes->get('/terminosYUsos', 'Home::terminosYUsos');
 $routes->get('/catalogoProductos', 'Home::catalogoProductos');
 $routes->get('/consultas', 'Home::consultas');
-
+$routes->get('carrito', 'Home::carrito');
+$routes->get('login', 'Home::login');
 $routes->post('/consultas/enviar', 'Home::enviarConsulta');

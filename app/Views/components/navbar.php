@@ -47,7 +47,7 @@ $actualMethod = service('router')->methodName();
             </ul>
 
             <!-- Íconos de usuario y carrito -->
-            <ul class="navbar-nav">
+            <ul class="navbar-nav ms-auto"><!--ms-auto alinea a la derecha-->
                 <li class="nav-item">
                     <a class="nav-link text-white" href="<?= base_url('carrito') ?>">
                         <i class="bi bi-cart-fill"></i>
