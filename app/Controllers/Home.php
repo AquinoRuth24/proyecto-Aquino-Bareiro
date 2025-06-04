@@ -64,7 +64,7 @@ public function carrito(): string
 public function login(): string
 {
     return view('templates/main-layout', [
-        'title' => 'Inicio Secion- Yesi Yohi Store',
+        'title' => 'Inicio Sesion- Yesi Yohi Store',
         'content' => view('pages/login')
     ]);
 }
