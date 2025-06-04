@@ -1,6 +1,6 @@
 <!-- Sección Quienes Somos -->
 <section class="hero">
-    <h2>Quiénes Somos</h2>
+    <h1>Quiénes Somos</h1>
 </section>
 <!-- Como contactarnos -->
 <div class="row justify-content-center mb-4">

@@ -1,9 +1,11 @@
-<section class="hero">Terminos y Usos</section>
+<section class="hero">
+    <h1> Terminos y Usos</h1>
+</section>
 
 <div>
     <div class="row justify-content-center mb-4">
         <div class="col-md-8">
-            <div class="card h-100 shadow-sm text-center">
+            <div class="card h-100 shadow-sm text-justify">
                 <h5 class="card-title">Aviso Legal - Términos y Condiciones de Uso</h5>
                 <ul class="list-unstyled">
                     <li><strong>1. Aceptación de los Términos</strong></li>
@@ -65,3 +67,6 @@
 
                 </ul>
             </div>
+        </div>
+    </div>
+</div>

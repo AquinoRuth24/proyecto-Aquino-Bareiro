@@ -1,4 +1,4 @@
-<section class="catalogo-producto">
-        <h2>Catalogo De Productos</h2>
+<section class="hero">
+        <h1>Catalogo De Productos</h1>
     </section>
 
