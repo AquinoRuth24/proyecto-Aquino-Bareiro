@@ -15,3 +15,5 @@ $routes->get('/consultas', 'Home::consultas');
 $routes->get('carrito', 'Home::carrito');
 $routes->get('login', 'Home::login');
 $routes->post('/consultas/enviar', 'Home::enviarConsulta');
+$routes->get('registrar', 'Home::registrar');
+$routes->post('registrar/guardar', 'Home::guardarUsuario');

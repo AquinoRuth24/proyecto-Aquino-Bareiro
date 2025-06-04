@@ -26,7 +26,7 @@
                     <button type="submit" class="btn btn-light rounded-pill">Iniciar Sesion</button>
                 </div>
 
-                <p class="text-center text-white">No tiene una cuenta? <a href="#" class="text-white fw-bold text-decoration-underline">Registrate</a></p>
+                <p class="text-center text-white">No tiene una cuenta? <a href="<?= base_url('registrar') ?>" class="text-white fw-bold text-decoration-underline">Registrate</a></p>
             </form>
         </div>
     </div>

@@ -68,6 +68,25 @@ public function login(): string
         'content' => view('pages/login')
     ]);
 }
+public function registrar(): string
+{ 
+    return view('templates/main-layout', [
+        'title' => 'Registro de Usuario - Yesi Yohi Store',
+        'content' => view('pages/registrar')
+    ]);
+}
+
+public function guardarUsuario()
+{   
+    $nombre=$this->request->getPost('nombre');
+    $email=$this->request->getPost('email');
+    $telefono=$this->request->getPost('telefono');
+    $contrasena=$this->request->getPost('contrasena');
+    // Aquí puedes agregar la lógica para guardar el usuario en la base de datos
+}
+
+
+
     public function enviarConsulta()
     {
         $nombre = $this->request->getPost('nombre');
