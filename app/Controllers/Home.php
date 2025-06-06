@@ -76,7 +76,7 @@ public function registrar(): string
     ]);
 }
 
-public function guardarUsuario()
+public function registrarUsuario()
 {   
     $nombre=$this->request->getPost('nombre');
     $email=$this->request->getPost('email');

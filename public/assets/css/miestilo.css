@@ -88,3 +88,18 @@ transition: 0.3s;
 background-color: #ddd;
 color: #000;
 }
+
+.registrar{
+color:#e0e0e0;
+text-align: center;
+background:blueviolet;
+}
+
+.formularioRegistro {       
+border-radius: 1rem;         
+padding: 2rem;               
+background-color:#fff;      
+max-width: 600px;          
+margin: 2rem;
+}
+
