@@ -40,10 +40,13 @@ $actualMethod = service('router')->methodName();
                     <a class="nav-link  <?= ($actualMethod === 'catalogoProductos') ? 'active text-success' : '' ?>"
                         href="<?= base_url('catalogoProductos') ?>">Catalago</a>
                 </li>
+                <!-- Mostrar "Consultas" solo si el usuario está logueado -->
+                <?php if (session()->get('isLoggedIn')): ?>
                 <li class="nav-item">
                     <a class="nav-link  <?= ($actualMethod === 'consultas') ? 'active text-success' : '' ?>"
                         href="<?= base_url('consultas') ?>">Consultas</a>
                 </li>
+                <?php endif; ?>
             </ul>
 
             <!-- Íconos de usuario y carrito -->
@@ -53,6 +56,7 @@ $actualMethod = service('router')->methodName();
                         <i class="bi bi-cart-fill"></i>
                     </a>
                 </li>
+                
                 <li class="nav-item">
                     <a class="nav-link text-white" href="<?= base_url('login') ?>">
                         <i class="bi bi-person-circle"></i>
