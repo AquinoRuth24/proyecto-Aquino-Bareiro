@@ -4,10 +4,17 @@
             <h2 class="text-center text-white mb-4">Inicio De Sesion</h2>
 
             <?php if(session ()->getFlashdata('message')):?>
+<<<<<<< HEAD
             <div class="alert alert-success">
                 <?= session()->getFlashdata('message') ?>
             </div>
             <?php endif; ?>
+=======
+                <div class="alert alert-success">
+                    <?= session()->getFlashdata('message') ?>
+                </div>
+                <?php endif; ?>
+>>>>>>> 29a4c00967314f46e8041805242372dcfafaaecb
 
             <form action="<?= base_url('/login') ?>" method="post">
                 <div class="input-group mb-3">
@@ -31,8 +38,12 @@
                     <button type="submit" class="btn btn-light rounded-pill">Iniciar Sesion</button>
                 </div>
 
+<<<<<<< HEAD
                 <p class="text-center text-white">No tiene una cuenta? <a href="<?= base_url('/registrar') ?>"
                         class="text-white fw-bold text-decoration-underline">Registrate</a></p>
+=======
+                <p class="text-center text-white">No tiene una cuenta? <a href="<?= base_url('/registrar') ?>" class="text-white fw-bold text-decoration-underline">Registrate</a></p>
+>>>>>>> 29a4c00967314f46e8041805242372dcfafaaecb
             </form>
         </div>
     </div>
