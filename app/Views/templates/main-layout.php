@@ -8,6 +8,7 @@
         <link href="public/assets/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="public/assets/css/miestilo.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+        <link rel="icon" href="public/assets/img/marca.ico" type="image/x-icon">
     </head>
 
     <body>

@@ -3,7 +3,13 @@
         <div class="login-box p-4 rounded-4">
             <h2 class="text-center text-white mb-4">Inicio De Sesion</h2>
 
-            <form>
+            <?php if(session ()->getFlashdata('message')):?>
+                <div class="alert alert-success">
+                    <?= session()->getFlashdata('message') ?>
+                </div>
+                <?php endif; ?>
+
+            <form action="<?= base_url('/login') ?>" method="post">
                 <div class="input-group mb-3">
                     <span class="input-group-text"><i class="bi bi-person"></i></span>
                     <input type="text" class="form-control" placeholder="Nombre de Usuario" required>
@@ -26,7 +32,7 @@
                     <button type="submit" class="btn btn-light rounded-pill">Iniciar Sesion</button>
                 </div>
 
-                <p class="text-center text-white">No tiene una cuenta? <a href="<?= base_url('registrar') ?>" class="text-white fw-bold text-decoration-underline">Registrate</a></p>
+                <p class="text-center text-white">No tiene una cuenta? <a href="<?= base_url('/registrar') ?>" class="text-white fw-bold text-decoration-underline">Registrate</a></p>
             </form>
         </div>
     </div>
