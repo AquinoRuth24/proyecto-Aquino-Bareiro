@@ -6,9 +6,14 @@ class Home extends BaseController
 {
     public function index(): string
     {
+        $db = \Config\Database::connect();
+
+        $query = $db->query('SELECT * FROM producto');
+        $resultado = $query->getResultArray();
+
         return view('templates/main-layout', [
             'title' => 'Principal-Yesi Yohi Store',
-            'content' => view('pages/principal')
+            'content' => view('pages/principal', ['productos' => $resultado])
         ]);
     }
     public function quienesSomos(): string
