@@ -44,7 +44,7 @@ class Home extends BaseController
             'content' => view('pages/terminosYUsos')
         ]);
     }
-    
+
     public function catalogoProductos(): string
     {
         return view('templates/main-layout', [
@@ -52,43 +52,45 @@ class Home extends BaseController
             'content' => view('pages/catalogoProductos')
         ]);
     }
-    public function consultas(): string
+    public function consultas()
     {
         return view('templates/main-layout', [
             'title' => 'Consultas-Yesi Yohi Store',
             'content' => view('pages/consultas')
         ]);
     }
-public function carrito(): string
-{
-    return view('templates/main-layout', [
-        'title' => 'Mi Carrito - Yesi Yohi Store',
-        'content' => view('pages/carrito')
-    ]);
-}
-public function login(): string
-{
-    return view('templates/main-layout', [
-        'title' => 'Inicio Sesion- Yesi Yohi Store',
-        'content' => view('pages/login')
-    ]);
-}
-public function registrar(): string
-{ 
-    return view('templates/main-layout', [
-        'title' => 'Registro de Usuario - Yesi Yohi Store',
-        'content' => view('pages/registrar')
-    ]);
-}
 
-public function registrarUsuario()
-{   
-    $nombre=$this->request->getPost('nombre');
-    $email=$this->request->getPost('email');
-    $telefono=$this->request->getPost('telefono');
-    $contrasena=$this->request->getPost('contrasena');
-    // Aquí puedes agregar la lógica para guardar el usuario en la base de datos
-}
+    
+    public function carrito(): string
+    {
+        return view('templates/main-layout', [
+            'title' => 'Mi Carrito - Yesi Yohi Store',
+            'content' => view('pages/carrito')
+        ]);
+    }
+    public function login(): string
+    {
+        return view('templates/main-layout', [
+            'title' => 'Inicio Sesion- Yesi Yohi Store',
+            'content' => view('pages/login')
+        ]);
+    }
+    public function registrar(): string
+    {
+        return view('templates/main-layout', [
+            'title' => 'Registro de Usuario - Yesi Yohi Store',
+            'content' => view('pages/registrar')
+        ]);
+    }
+
+    public function guargarUsuario()
+    {
+        $nombre = $this->request->getPost('nombre');
+        $email = $this->request->getPost('email');
+        $telefono = $this->request->getPost('telefono');
+        $contrasena = $this->request->getPost('contrasena');
+        // Aquí puedes agregar la lógica para guardar el usuario en la base de datos
+    }
 
 
 

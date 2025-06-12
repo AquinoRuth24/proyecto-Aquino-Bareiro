@@ -3,11 +3,11 @@
         <div class="login-box p-4 rounded-4">
             <h2 class="text-center text-white mb-4">Inicio De Sesion</h2>
 
-            <?php if(session ()->getFlashdata('message')):?>
+            <?php if (session()->getFlashdata('message')): ?>
                 <div class="alert alert-success">
                     <?= session()->getFlashdata('message') ?>
                 </div>
-                <?php endif; ?>
+            <?php endif; ?>
 
             <form action="<?= base_url('/login') ?>" method="post">
                 <div class="input-group mb-3">
@@ -19,7 +19,6 @@
                     <span class="input-group-text"><i class="bi bi-lock"></i></span>
                     <input type="password" class="form-control" placeholder="Contraseña" required>
                 </div>
-
                 <div class="d-flex justify-content-between mb-3">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="recordarme">
