@@ -14,7 +14,7 @@ $routes->get('/catalogoProductos', 'Home::catalogoProductos');
 $routes->get('/consultas', 'Home::consultas');
 $routes->get('/carrito', 'Home::carrito');
 $routes->post('/consultas/enviar', 'Home::enviarConsulta');
-
+$routes->get('/registrar', 'Home::registrar');
 $routes->get('/login', 'Auth::loginForm');
 $routes->post('/login', 'Auth::login');
 $routes->get('/logout', 'Auth::logout');
