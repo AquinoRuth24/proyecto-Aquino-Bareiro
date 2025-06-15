@@ -2,7 +2,7 @@
 $actualMethod = service('router')->methodName();
 ?>
 
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:rgb(0, 0, 0);">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(to right, #0f0c29, #302b63, #24243e);">
     <div class="container-fluid">
         <img src="public/assets/img/marca.jpg" alt="" height="80">
         <a class="navbar-brand" href="<?= base_url() ?>">Yesi Yohi Store</a>
@@ -42,10 +42,10 @@ $actualMethod = service('router')->methodName();
                 </li>
                 <!-- Mostrar "Consultas" solo si el usuario está logueado -->
                 <?php if (session()->get('isLoggedIn')): ?>
-                <li class="nav-item">
-                    <a class="nav-link  <?= ($actualMethod === 'consultas') ? 'active text-success' : '' ?>"
-                        href="<?= base_url('consultas') ?>">Consultas</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link  <?= ($actualMethod === 'consultas') ? 'active text-success' : '' ?>"
+                            href="<?= base_url('consultas') ?>">Consultas</a>
+                    </li>
                 <?php endif; ?>
             </ul>
 
@@ -56,12 +56,19 @@ $actualMethod = service('router')->methodName();
                         <i class="bi bi-cart-fill"></i>
                     </a>
                 </li>
-                
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="<?= base_url('login') ?>">
-                        <i class="bi bi-person-circle"></i>
-                    </a>
-                </li>
+                <!-- Mostrar nombre de usuario y botón de cerrar sesión si está logueado -->
+                <?php if (session()->get('logged_in')): ?>
+                    <span class="navbar-text text-white me-3">
+                        Hola, <?= session('user_name') ?>!
+                    </span>
+                    <a class="btn btn-outline-light" href="<?= base_url('/logout') ?>">Cerrar sesión</a>
+                <?php else: ?>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="<?= base_url('login') ?>">
+                            <i class="bi bi-person-circle"></i>
+                        </a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
     </div>

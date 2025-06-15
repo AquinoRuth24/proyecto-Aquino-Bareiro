@@ -12,12 +12,12 @@
             <form action="<?= base_url('/login') ?>" method="post">
                 <div class="input-group mb-3">
                     <span class="input-group-text"><i class="bi bi-person"></i></span>
-                    <input type="text" class="form-control" placeholder="Nombre de Usuario" required>
+                    <input type="text" class="form-control" name="email" placeholder="Correo electrónico" required>
                 </div>
 
                 <div class="input-group mb-3">
                     <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                    <input type="password" class="form-control" placeholder="Contraseña" required>
+                    <input type="password" class="form-control" name="password" placeholder="Contraseña" required>
                 </div>
                 <div class="d-flex justify-content-between mb-3">
                     <div class="form-check">
@@ -26,7 +26,7 @@
                     </div>
                     <a href="#" class="text-white text-decoration-none">Olvido su contraseña?</a>
                 </div>
-
+                
                 <div class="d-grid mb-3">
                     <button type="submit" class="btn btn-light rounded-pill">Iniciar Sesion</button>
                 </div>

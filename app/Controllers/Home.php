@@ -94,14 +94,25 @@ class Home extends BaseController
 
 
 
-    public function enviarConsulta()
+    public function enviarMensaje()
     {
         $nombre = $this->request->getPost('nombre');
         $email = $this->request->getPost('email');
         $telefono = $this->request->getPost('telefono');
         $mensaje = $this->request->getPost('mensaje');
 
-        /* Aca hay que configurar el envío de la consulta a la base de datos o a un servicio de correo */
+       // Acá podrías guardar el mensaje en la base de datos o enviarlo por email
+    // Ejemplo de guardar en la tabla 'mensajes':
+    /*
+    $contactoModel = new \App\Models\ContactoModel();
+    $contactoModel->save([
+        'nombre' => $nombre,
+        'email' => $email,
+        'telefono' => $telefono,
+        'mensaje' => $mensaje,
+    ]);
+    */
+
         return redirect()->back()->with('mensaje', '¡Gracias por tu consulta! Te responderemos pronto.');
     }
 }

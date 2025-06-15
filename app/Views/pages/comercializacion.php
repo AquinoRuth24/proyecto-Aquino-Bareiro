@@ -1,6 +1,6 @@
 <section class="hero">
-        <h1>Comercializacion</h1>
-    </section>
+    <h1>Comercializacion</h1>
+</section>
 <div class="container mt-4">
     <div class="row g-4">
 

@@ -44,23 +44,23 @@
                         <li style="margin-top: 1rem;">Contacto: Aquino Ruth:</li>
                         <li style="padding-left: 2rem;"><img src="public/assets/img/logoWpp.jpg" alt="Whatsapp"
                                 height="40">: <a href="tel:+54 9 379 480-0790">+54 9 379 480-0790</a></li>
-                        <li>📧Email: <a href="mailto:ruth.aquino@outlook.com">aquinoruth2004@gmail.com</a></li>
+                        <li>📧Email: <a href="mailto:aquinoruth2004@gmail.com">aquinoruth2004@gmail.com</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- Formulario de consultas -->
+<!-- Formulario de mensaje -->
 <section class="formulario">
-    <h2 style="margin-top: 2rem; text-align: center;">Formulario de Consultas</h2>
+    <h2 style="margin-top: 2rem; text-align: center;">Formulario de Mensaje</h2>
     <?php if (session()->getFlashdata('mensaje')): ?>
     <div class="alert alert-success">
         <?= session()->getFlashdata('mensaje') ?>
     </div>
     <?php endif; ?>
 
-    <form action="<?= base_url('enviar/consulta') ?>" method="post" style="max-width: 600px; margin: auto;">
+    <form action="<?= base_url('/contacto/mensaje') ?>" method="post" style="max-width: 600px; margin: auto;">
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre completo</label>
             <input type="text" class="form-control" id="nombre" name="nombre" required minlength="3" maxlength="50"
@@ -73,7 +73,7 @@
                 placeholder="Ej: lucas.beltran@gmail.com">
         </div>
         <div class="mb-3">
-            <label for="telefono" class="form-label">Teléfono</label>
+            <label for="telefono" class="form-label">Teléfono(opcional)</label>
             <input type="tel" class="form-control" id="telefono" name="telefono" required pattern="[0-9]{10}"
                 title="Número de teléfono válido de 10 dígitos" placeholder="Ej: 3794222684">
         </div>
@@ -83,7 +83,7 @@
                 title="el mensaje debe tener al menos 10 caracteres"
                 placeholder="Escribe tu mensaje aquí..."></textarea>
         </div>
-        <button type="submit" class="btn btn-success">Enviar consulta</button>
+        <button type="submit" class="btn btn-success">Enviar mensaje</button>
     </form>
 
 </section>

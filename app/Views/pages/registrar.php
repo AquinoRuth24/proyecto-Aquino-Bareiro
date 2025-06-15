@@ -2,8 +2,11 @@
     <h1>Registro de Usuario</h1>
     <p>Por favor, complete el siguiente formulario para registrarse.</p>
 </section>
+<?php if(session()->getFlashdata('error')): ?>
+    <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
+<?php endif; ?>
 
-<form>
+<form action="<?= base_url('/registrar') ?>" method="post">
     <div class="formularioRegistro">
         <div class="container mt-4">
             <div class="mb-3">
@@ -35,21 +38,3 @@
         </div>
     </div>
 </form>
-
-
-
-
-
-<!--<form action="<?= base_url('registrar/usuario') ?>
-    <?php if (session()->getFlashdata('mensaje')): ?>
-    <div class="alert alert-success">
-        <?= session()->getFlashdata('mensaje') ?>
-    </div>
-    <?php endif; ?>
-    <?php if (session()->getFlashdata('error')): ?>
-    <div class="alert alert-danger">
-        <?= session()->getFlashdata('error') ?>
-    </div>
-    <?php endif; ?>
-    <form action="<?= base_url('registrar/usuario') ?>" method="post">
-</form>-->

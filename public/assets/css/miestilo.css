@@ -15,9 +15,8 @@ main {
 }
   /* HERO SECTION */
 .hero {
-    background-color: rgb(54, 104, 241);
     text-align:center;
-    color: white;
+    color:#000;
 }
 
 .hero h1 {
@@ -31,7 +30,7 @@ main {
   /* FOOTER */
 .footer {
     width: 100%;
-    background-color: #212529;
+    background-color:#000;
     color: #ffffff;
     text-align: center;
     padding: 20px 0;
