@@ -3,6 +3,11 @@
         <div class="login-box p-4 rounded-4">
             <h2 class="text-center text-white mb-4">Inicio De Sesion</h2>
 
+            <?php if (session()->getFlashdata('error')): ?>
+                <div class="alert alert-danger">
+                    <?= session()->getFlashdata('error') ?>
+                </div>
+            <?php endif; ?>
             <?php if (session()->getFlashdata('message')): ?>
                 <div class="alert alert-success">
                     <?= session()->getFlashdata('message') ?>
@@ -21,12 +26,18 @@
                 </div>
                 <div class="d-flex justify-content-between mb-3">
                     <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="verPassword" onclick="mostrarPassword()">
+                        <label class="form-check-label" for="verPassword">Mostrar contraseña</label>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between mb-3">
+                    <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="recordarme">
                         <label class="form-check-label text-white" for="recordarme">Recordar</label>
                     </div>
                     <a href="#" class="text-white text-decoration-none">Olvido su contraseña?</a>
                 </div>
-                
+
                 <div class="d-grid mb-3">
                     <button type="submit" class="btn btn-light rounded-pill">Iniciar Sesion</button>
                 </div>
@@ -36,3 +47,12 @@
         </div>
     </div>
 </div>
+<script>
+    function mostrarPassword() {
+        var pass = document.getElementById("password");
+        if (pass.type === "password") {
+            pass.type = "text";
+        } else {
+            pass.type = "password";
+        }
+    }

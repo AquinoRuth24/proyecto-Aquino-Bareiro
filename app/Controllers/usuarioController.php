@@ -38,30 +38,46 @@ class usuarioController extends Controller
 
             return redirect()->to('/login')->with('message', '¡Registro exitoso!');
         }
-
-        return view('registro');
+        return view('templates/main-layout', [
+            'title' => 'Inicio Sesion- Yesi Yohi Store',
+            'content' => view('pages/login')
+        ]);
     }
 
     public function login()
     {
         helper(['form']);
-
+        // Verificar si el usuario ya está logueado
+        if (session()->get('logged_in')) {
+            return redirect()->to('/usuarioLogeado')->with('message', 'Ya estás logueado.');
+        }
+        // Si no está logueado, mostrar el formulario de inicio de sesión
         if ($this->request->getMethod() === 'post') {
             $email = $this->request->getPost('email');
             $password = $this->request->getPost('password');
 
             $usuarioModel = new usuarioModel();
             $usuario = $usuarioModel->where('email', $email)->first();
+            // Verificar si el usuario existe y la contraseña es correcta
 
-            if ($usuario && password_verify($password, $usuario['password'])) {
-                session()->set('logged_in', true);
-                session()->set('user_id', $usuario['id-usuario']);
-                session()->set('user_name', $usuario['nombre']);
-
-                return redirect()->to('/principal')->with('message', '¡Inicio de sesión exitoso!');
-            } else {
-                return redirect()->back()->withInput()->with('error', 'Credenciales incorrectas.');
+            if (!$usuario) {
+                return redirect()->back()->withInput()->with('error', 'Usuario no encontrado.');
             }
+            // Verificar la contraseña
+            if (!password_verify($password, $usuario['password'])) {
+                return redirect()->back()->withInput()->with('error', 'Contraseña no válida.');
+            }
+            // Iniciar sesión
+            $session = session();
+            $session->set([
+                'user_id' => $usuario['id_usuario'],
+                'nombre' => $usuario['nombre'],
+                'email' => $usuario['email'],
+                'telefono' => $usuario['telefono'],
+                'logged_in' => true
+            ]);
+            var_dump(session()->get());
+            return redirect()->to('/usuarioLogeado')->with('message', 'Inicio de sesión exitoso.');
         }
 
         return view('templates/main-layout', [
@@ -75,6 +91,15 @@ class usuarioController extends Controller
     {
         $session = session();
         $session->destroy();
-        return redirect()->to('/login')->with('message', 'Sesión cerrada correctamente.');
+        return redirect()->to('/principal')->with('message', 'Sesión cerrada correctamente.');
     }
+
+    public function usuarioLogeado()
+{
+    return view('templates/main-layout', [
+        'title' => 'Usuario Logeado',
+        'content' => view('pages/usuarioLogeado')
+    ]);
+}
+
 }

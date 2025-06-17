@@ -93,6 +93,17 @@ class Home extends BaseController
             'content' => view('pages/registrar')
         ]);
     }
+ public function usuarioLogeado()
+ {
+    return view('templates/main-layout', [
+    'title' => 'Bienvenido - Yesi Yohi Store',
+    'content' => view('pages/usuarioLogeado', [
+        'nombre' => session('nombre'),
+        'email' => session('email'),
+        'telefono' => session('telefono')
+    ])
+]);
+}
 
     public function guargarUsuario()
     {

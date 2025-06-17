@@ -91,7 +91,7 @@ color: #000;
 .registrar{
 color:#e0e0e0;
 text-align: center;
-background:blueviolet;
+background:rgb(37, 3, 68);
 }
 
 .formularioRegistro {       
@@ -101,4 +101,3 @@ background-color:#fff;
 max-width: 600px;          
 margin: 2rem;
 }
-
