@@ -23,7 +23,7 @@
                                 <?php foreach ($imagenes[$producto['id_producto']] as $imgIndex => $imagen): ?>
                                 <img src="<?= base_url($imagen) ?>" class="m-1 border rounded"
                                     alt="<?= $producto['nombre'] ?>"
-                                    style="width: 80px; height: 80px; object-fit: cover; cursor: zoom-in;"
+                                    style="width: 120px; height: 120px; object-fit: cover; cursor: zoom-in;"
                                     onclick="abrirGaleria(<?= htmlspecialchars(json_encode(array_map('base_url', $imagenes[$producto['id_producto']]))); ?>, <?= $imgIndex ?>)">
                                 <?php endforeach; ?>
                             </div>
