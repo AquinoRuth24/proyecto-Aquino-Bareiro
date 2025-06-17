@@ -8,12 +8,23 @@ class Home extends BaseController
     {
         $db = \Config\Database::connect();
 
+        // Se obtienen los productos de la base de datos
         $query = $db->query('SELECT * FROM producto');
-        $resultado = $query->getResultArray();
+        $productos= $query->getResultArray();
+
+        // Se obtienen las imnagenes de los productos
+        $query= $db->query('SELECT * FROM imagen_producto');
+        $imagenesBd= $query->getResultArray();
+
+        // Se combinan los productos con sus imágenes
+        $imagenes = [];
+        foreach ($imagenesBd as $imagen) {
+            $imagenes[$imagen['id_producto']][] = $imagen['url_imagen'];
+        }
 
         return view('templates/main-layout', [
             'title' => 'Principal-Yesi Yohi Store',
-            'content' => view('pages/principal', ['productos' => $resultado])
+            'content' => view('pages/principal', ['productos' => $productos, 'imagenes' => $imagenes])
         ]);
     }
     public function quienesSomos(): string
