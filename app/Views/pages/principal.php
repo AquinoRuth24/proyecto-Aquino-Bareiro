@@ -103,4 +103,4 @@ function cambiarImagen(direccion) {
     if (indiceActual >= galeriaActual.length) indiceActual = 0;
     mostrarImagen();
 }
-</script>
+</script>                                                                                                                                     

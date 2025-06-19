@@ -9,12 +9,12 @@ class Home extends BaseController
         $db = \Config\Database::connect();
 
         // Se obtienen los productos de la base de datos
-        $query = $db->query('SELECT * FROM producto');
-        $productos= $query->getResultArray();
+        $query = $db->query('SELECT * FROM productos');
+        $productos = $query->getResultArray();
 
         // Se obtienen las imnagenes de los productos
-        $query= $db->query('SELECT * FROM imagen_producto');
-        $imagenesBd= $query->getResultArray();
+        $query = $db->query('SELECT * FROM imagen');
+        $imagenesBd = $query->getResultArray();
 
         // Se combinan los productos con sus imágenes
         $imagenes = [];
@@ -71,7 +71,15 @@ class Home extends BaseController
         ]);
     }
 
-    
+    public function administrador(): string
+    {
+        return view('templates/main-layout', [
+            'title' => 'administrador - Yesi Yohi Store',
+            'content' => view('pages/administrador')
+        ]);
+    }
+
+
     public function carrito(): string
     {
         return view('templates/main-layout', [
@@ -93,17 +101,17 @@ class Home extends BaseController
             'content' => view('pages/registrar')
         ]);
     }
- public function usuarioLogeado()
- {
-    return view('templates/main-layout', [
-    'title' => 'Bienvenido - Yesi Yohi Store',
-    'content' => view('pages/usuarioLogeado', [
-        'nombre' => session('nombre'),
-        'email' => session('email'),
-        'telefono' => session('telefono')
-    ])
-]);
-}
+    public function usuarioLogeado()
+    {
+        return view('templates/main-layout', [
+            'title' => 'Bienvenido - Yesi Yohi Store',
+            'content' => view('pages/usuarioLogeado', [
+                'nombre' => session('nombre'),
+                'email' => session('email'),
+                'telefono' => session('telefono')
+            ])
+        ]);
+    }
 
     public function guargarUsuario()
     {
@@ -123,9 +131,9 @@ class Home extends BaseController
         $telefono = $this->request->getPost('telefono');
         $mensaje = $this->request->getPost('mensaje');
 
-       // Acá podrías guardar el mensaje en la base de datos o enviarlo por email
-    // Ejemplo de guardar en la tabla 'mensajes':
-    /*
+        // Acá podrías guardar el mensaje en la base de datos o enviarlo por email
+        // Ejemplo de guardar en la tabla 'mensajes':
+        /*
     $contactoModel = new \App\Models\ContactoModel();
     $contactoModel->save([
         'nombre' => $nombre,
