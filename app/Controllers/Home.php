@@ -9,11 +9,11 @@ class Home extends BaseController
         $db = \Config\Database::connect();
 
         // Se obtienen los productos de la base de datos
-        $query = $db->query('SELECT * FROM producto');
+        $query = $db->query('SELECT * FROM productos');
         $productos = $query->getResultArray();
 
         // Se obtienen las imnagenes de los productos
-        $query = $db->query('SELECT * FROM imagen_producto');
+        $query = $db->query('SELECT * FROM imagen');
         $imagenesBd = $query->getResultArray();
 
         // Se combinan los productos con sus imágenes
@@ -68,6 +68,14 @@ class Home extends BaseController
         return view('templates/main-layout', [
             'title' => 'Consultas-Yesi Yohi Store',
             'content' => view('pages/consultas')
+        ]);
+    }
+
+    public function administrador(): string
+    {
+        return view('templates/main-layout', [
+            'title' => 'administrador - Yesi Yohi Store',
+            'content' => view('pages/administrador')
         ]);
     }
 
