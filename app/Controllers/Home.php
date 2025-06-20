@@ -10,11 +10,11 @@ class Home extends BaseController
 
         // Se obtienen los productos de la base de datos
         $query = $db->query('SELECT * FROM producto');
-        $productos= $query->getResultArray();
+        $productos = $query->getResultArray();
 
         // Se obtienen las imnagenes de los productos
-        $query= $db->query('SELECT * FROM imagen_producto');
-        $imagenesBd= $query->getResultArray();
+        $query = $db->query('SELECT * FROM imagen_producto');
+        $imagenesBd = $query->getResultArray();
 
         // Se combinan los productos con sus imágenes
         $imagenes = [];
@@ -71,7 +71,7 @@ class Home extends BaseController
         ]);
     }
 
-    
+
     public function carrito(): string
     {
         return view('templates/main-layout', [
@@ -93,26 +93,47 @@ class Home extends BaseController
             'content' => view('pages/registrar')
         ]);
     }
- public function usuarioLogeado()
- {
-    return view('templates/main-layout', [
-    'title' => 'Bienvenido - Yesi Yohi Store',
-    'content' => view('pages/usuarioLogeado', [
-        'nombre' => session('nombre'),
-        'email' => session('email'),
-        'telefono' => session('telefono')
-    ])
-]);
-}
+    /*public function usuarioLogeado()
+    {
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to('/login')->with('error', 'Debes iniciar sesión para acceder a esta página.');
+        }
+        $db = \Config\Database::connect();
 
-    public function guargarUsuario()
+        // Se obtienen los productos de la base de datos
+        $query = $db->query('SELECT * FROM producto');
+        $productos = $query->getResultArray();
+
+        // Se obtienen las imnagenes de los productos
+        $query = $db->query('SELECT * FROM imagen_producto');
+        $imagenesBd = $query->getResultArray();
+
+        // Se combinan los productos con sus imágenes
+        $imagenes = [];
+        foreach ($imagenesBd as $imagen) {
+            $imagenes[$imagen['id_producto']][] = $imagen['url_imagen'];
+        }
+
+        return view('templates/main-layout', [
+            'title' => 'Bienvenido - Yesi Yohi Store',
+            'content' => view('pages/usuarioLogeado', [
+                'nombre' => session('nombre'),
+                'email' => session('email'),
+                'telefono' => session('telefono'),
+                'productos' => $productos,
+                'imagenes' => $imagenes
+            ])
+        ]);
+    }*/
+
+
+    /*public function guardarUsuario()
     {
         $nombre = $this->request->getPost('nombre');
         $email = $this->request->getPost('email');
         $telefono = $this->request->getPost('telefono');
         $contrasena = $this->request->getPost('contrasena');
-        // Aquí puedes agregar la lógica para guardar el usuario en la base de datos
-    }
+    }*/
 
 
 
@@ -123,9 +144,9 @@ class Home extends BaseController
         $telefono = $this->request->getPost('telefono');
         $mensaje = $this->request->getPost('mensaje');
 
-       // Acá podrías guardar el mensaje en la base de datos o enviarlo por email
-    // Ejemplo de guardar en la tabla 'mensajes':
-    /*
+        // Acá podrías guardar el mensaje en la base de datos o enviarlo por email
+        // Ejemplo de guardar en la tabla 'mensajes':
+        /*
     $contactoModel = new \App\Models\ContactoModel();
     $contactoModel->save([
         'nombre' => $nombre,
