@@ -23,7 +23,7 @@ class ProductoController extends Controller
             );
         }
 
-        return view('productos/index', ['productos' => $productos, 'imagenes' => $imagenes]);
+        return view('pages/productos/index', ['productos' => $productos, 'imagenes' => $imagenes]);
     }
 
     public function crearProducto()
@@ -32,13 +32,14 @@ class ProductoController extends Controller
 
         if ($this->request->getMethod() === 'post') {
             $validationRules = [
-                'nombre' => 'required|min_length[16]',
+                'nombre' => 'required|min_length[3]',
+                'descripcion' => 'required|min_length[3]',
                 'precio' => 'required|decimal',
                 'stock'  => 'required|integer'
             ];
 
             if (! $this->validate($validationRules)) {
-                return view('productos/crearProducto', [
+                return view('pages/productos/crearProducto', [
                     'validation' => $this->validator
                 ]);
             }
@@ -46,6 +47,7 @@ class ProductoController extends Controller
             $productoModel = new ProductoModel();
             $imagenModel = new ImagenModel();
 
+            // Insertar producto
             $datos = [
                 'nombre'      => $this->request->getPost('nombre'),
                 'descripcion' => $this->request->getPost('descripcion'),
@@ -54,8 +56,11 @@ class ProductoController extends Controller
                 'activo'      => 1
             ];
 
-            $productoModel->insert($datos);
+            if (!$productoModel->insert($datos)) {
+                dd($productoModel->errors());
+            }
 
+            // Obtener el ID insertado
             $idProducto = $productoModel->insertID();
 
             $imagen = $this->request->getFile('imagen');
@@ -70,11 +75,13 @@ class ProductoController extends Controller
                 ]);
             }
 
+            session()->setFlashdata('success', 'Producto creado exitosamente.');
             return redirect()->to('/producto');
         }
 
-        return view('productos/crearProducto');
+        return view('pages/productos/crearProducto');
     }
+
 
     public function editarProducto($id)
     {
@@ -84,14 +91,14 @@ class ProductoController extends Controller
 
         if ($this->request->getMethod() === 'post') {
             $validationRules = [
-                'nombre' => 'required|min_length[16]',
+                'nombre' => 'required|min_length[3]',
                 'precio' => 'required|decimal',
                 'stock'  => 'required|integer'
             ];
             if (! $this->validate($validationRules)) {
                 $producto = $productoModel->find($id);
                 $imagenes = $imagenModel->where('id_producto', $id)->findAll();
-                return view('productos/editarProducto', [
+                return view('pages/productos/editarProducto', [
                     'producto' => $producto,
                     'imagenes' => $imagenes,
                     'validation' => $this->validator
@@ -127,7 +134,7 @@ class ProductoController extends Controller
         $producto = $productoModel->find($id);
         $imagenes = $imagenModel->where('id_producto', $id)->findAll();
 
-        return view('productos/editarProducto', ['producto' => $producto, 'imagenes' => $imagenes]);
+        return view('pages/productos/editarProducto', ['producto' => $producto, 'imagenes' => $imagenes]);
     }
 
     public function eliminarProducto($id)
@@ -143,7 +150,7 @@ class ProductoController extends Controller
 
         $productos = $productoModel->where('activo', 0)->findAll();
 
-        return view('productos/productosEliminados', ['productos' => $productos]);
+        return view('pages/productos/productosEliminados', ['productos' => $productos]);
     }
 
     public function restaurarProducto($id)
