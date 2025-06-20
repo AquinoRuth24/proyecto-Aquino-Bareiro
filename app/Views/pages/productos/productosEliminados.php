@@ -1,5 +1,9 @@
-<?= $this->extend('layouts/main') ?>
-<?= $this->section('content') ?>
+<head>
+    <title>Productos</title>
+    <link href="<?= base_url('public/assets/css/bootstrap.min.css') ?>" rel="stylesheet">
+    <link href="<?= base_url('public/assets/css/miestilo.css') ?>" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
 
 <div class="container mt-4">
     <h2>Productos Eliminados</h2>
@@ -26,5 +30,4 @@
         </tbody>
     </table>
 </div>
-
-<?= $this->endSection() ?>
+<script src="<?= base_url('public/assets/js/bootstrap.js') ?>"></script>
