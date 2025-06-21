@@ -17,17 +17,18 @@
             <form action="<?= base_url('/login') ?>" method="post">
                 <div class="input-group mb-3">
                     <span class="input-group-text"><i class="bi bi-person"></i></span>
-                    <input type="text" class="form-control" name="email" placeholder="Correo electrónico" required>
+                    <input type="email" class="form-control" id="email" name="email" required title="email valido"
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" maxlength="50" minlength="10" placeholder="Correo electronico">
                 </div>
 
                 <div class="input-group mb-3">
                     <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                    <input type="password" class="form-control" name="password" placeholder="Contraseña" required>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña" required>
                 </div>
                 <div class="d-flex justify-content-between mb-3">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="verPassword" onclick="mostrarPassword()">
-                        <label class="form-check-label" for="verPassword">Mostrar contraseña</label>
+                        <label class="form-check-label text-white" for="verPassword">Mostrar contraseña</label>
                     </div>
                 </div>
                 <div class="d-flex justify-content-between mb-3">
@@ -49,10 +50,7 @@
 </div>
 <script>
     function mostrarPassword() {
-        var pass = document.getElementById("password");
-        if (pass.type === "password") {
-            pass.type = "text";
-        } else {
-            pass.type = "password";
-        }
+        const input = document.getElementById("password");
+        input.type = input.type === "password" ? "text" : "password";
     }
+</script>

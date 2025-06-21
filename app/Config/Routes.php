@@ -31,15 +31,16 @@ $routes->get('consultas/marcarContestado/(:num)', 'ConsultaController::marcarCon
 $routes->match(['get', 'post'], 'consultas/responder/(:num)', 'ConsultaController::responder/$1');
 
 
+//$routes->get('/consultas', 'Home::consultas');
+$routes->get('/consultas', 'Consultas::index'); 
+$routes->post('/consultas/enviar', 'Consultas::enviar');
 
 // Formulario de contacto (formulario separado de consultas)
 $routes->post('/contacto/mensaje', 'Home::enviarMensaje');
 
 // Autenticación
-$routes->get('/login', 'usuarioController::login');
-$routes->post('/login', 'usuarioController::login');
-
-$routes->get('/logout', 'usuarioController::logout');
+$routes->match(['get', 'post'], 'login', 'UsuarioController::login');
+$routes->get('/logout', 'UsuarioController::logout');
 
 // Registro de usuarios y administradores
 $routes->get('/registrar', 'usuarioController::registrar');
@@ -48,8 +49,8 @@ $routes->get('/administrador', 'AdministradorController::administrador');
 
 
 // Página principal después del login
-$routes->get('/principal', 'Principal::index');
-$routes->get('/usuarioLogeado', 'usuarioController::usuarioLogeado');
+/*$routes->get('/principal', 'Principal::index');*/
+$routes->get('/usuarioLogeado', 'UsuarioController::usuarioLogeado');
 
 
 // Si deseas permitir ambas formas de acceso (GET y POST) a login o registrar:
