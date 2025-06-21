@@ -5,14 +5,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 
-<div class="container mt-4">
-    <h2>Editar Producto</h2>
+<div class="container mt-4;" style="text-align: center;" >
+    <h1>Editar Producto</h1>
+</div>
     <?php if (isset($validation)): ?>
         <div class="alert alert-danger">
             <?= $validation->listErrors() ?>
         </div>
     <?php endif; ?>
-
+<div style="   margin-left: 60;margin-right: auto; ">
     <form action="<?= site_url('producto/editarProducto/' . $producto['id_producto']) ?>" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label>Nombre:</label>

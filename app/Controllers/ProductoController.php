@@ -140,8 +140,10 @@ class ProductoController extends Controller
     public function eliminarProducto($id)
     {
         $productoModel = new ProductoModel();
+
         $productoModel->update($id, ['activo' => 0]);
-        return redirect()->to('/producto');
+
+        return redirect()->to('producto')->with('success', 'Producto eliminado lógicamente');
     }
 
     public function productosEliminados()
@@ -157,6 +159,7 @@ class ProductoController extends Controller
     {
         $productoModel = new ProductoModel();
         $productoModel->update($id, ['activo' => 1]);
-        return redirect()->to('/producto/productosEliminados');
+
+        return redirect()->to('producto')->with('success', 'Producto restaurado');
     }
 }

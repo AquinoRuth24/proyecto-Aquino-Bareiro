@@ -43,8 +43,8 @@ $actualMethod = service('router')->methodName();
                 <!-- Mostrar "Consultas" solo si el usuario está logueado -->
                 <?php if (session()->get('isLoggedIn')): ?>
                     <li class="nav-item">
-                        <a class="nav-link  <?= ($actualMethod === 'consultas') ? 'active text-success' : '' ?>"
-                            href="<?= base_url('consultas') ?>">Consultas</a>
+                        <a class="nav-link  <?= ($actualMethod === 'consultas ') ? 'active text-success' : '' ?>"
+                            href="<?= base_url('consultas  ') ?>">Consulta</a>
                     </li>
                 <?php endif; ?>
             </ul>

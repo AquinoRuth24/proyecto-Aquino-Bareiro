@@ -25,11 +25,21 @@
 
             <div class="collapse navbar-collapse" id="navbarAdmin">
                 <ul class="navbar-nav me-auto d-flex flex-row">
-                    <li class="nav-item me-3"><a class="nav-link" href="<?= site_url('principal') ?>">Home</a></li>
-                    <li class="nav-item me-3"><a class="nav-link" href="<?= site_url('usuario') ?>">Usuarios</a></li>
-                    <li class="nav-item me-3"><a class="nav-link" href="<?= site_url('producto') ?>">Productos</a></li>
-                    <li class="nav-item me-3"><a class="nav-link" href="<?= site_url('ventas') ?>">Ventas</a></li>
-                    <li class="nav-item me-3"><a class="nav-link" href="<?= site_url('consultas') ?>">Consultas</a></li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="<?= site_url('principal') ?>">Home</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="<?= site_url('usuario') ?>">Usuarios</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="<?= site_url('producto') ?>">Productos</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="<?= site_url('admin/ventas') ?>">Ventas</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="<?= site_url('admin/consultas') ?>">Consultas</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav ms-auto d-flex align-items-center flex-row">
                     <span class="navbar-text text-white me-3">
@@ -68,7 +78,7 @@
                 </a>
             </div>
             <div class="col-md-3">
-                <a href="<?= site_url('ventas') ?>" class="text-decoration-none text-dark">
+                <a href="<?= site_url('admin/ventas') ?>" class="text-decoration-none text-dark">
                     <div class="card text-center shadow-sm">
                         <div class="card-body">
                             <i class="bi bi-cart-check-fill display-4"></i>
@@ -78,7 +88,7 @@
                 </a>
             </div>
             <div class="col-md-3">
-                <a href="<?= site_url('consultas') ?>" class="text-decoration-none text-dark">
+                <a href="<?= site_url('admin/consultas') ?>" class="text-decoration-none text-dark">
                     <div class="card text-center shadow-sm">
                         <div class="card-body">
                             <i class="bi bi-chat-dots-fill display-4"></i>
@@ -88,8 +98,18 @@
                 </a>
             </div>
         </div>
-    </div>
+        <div class="col-md-3">
+            <a href="<?= site_url('admin/facturas') ?>" class="text-decoration-none text-dark">
+                <div class="card text-center shadow-sm">
+                    <div class="card-body">
+                        <i class="bi bi-file-earmark-text-fill display-4"></i>
+                        <h5 class="card-title mt-2">Facturas</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
 
+    </div>
     <script src="<?= base_url('public/assets/js/bootstrap.js') ?>"></script>
 </body>
 
