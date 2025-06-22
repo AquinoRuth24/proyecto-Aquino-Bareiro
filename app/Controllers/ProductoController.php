@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\ProductoModel;
 use App\Models\ImagenModel;
-use App\Models\CategoriaModel; // NUEVO
+use App\Models\CategoriaModel;
 use CodeIgniter\Controller;
 
 class ProductoController extends Controller
@@ -70,7 +70,7 @@ class ProductoController extends Controller
             $imagen = $this->request->getFile('imagen');
             if ($imagen && $imagen->isValid() && !$imagen->hasMoved()) {
                 $nombreImagen = $imagen->getRandomName();
-                $imagen->move('uploads', $nombreImagen);
+                $imagen->move(FCPATH . 'assets/img/', $nombreImagen);
 
                 $imagenModel->insert([
                     'id_producto'  => $idProducto,
@@ -129,11 +129,11 @@ class ProductoController extends Controller
                     ->update();
 
                 $nombre = $imagenArchivo->getRandomName();
-                $imagenArchivo->move('public/assets/img/', $nombre);
+                $imagenArchivo->move(FCPATH . 'assets/img/', $nombre);
 
                 $imagenModel->insert([
                     'id_producto'  => $id,
-                    'url_imagen'   => 'public/assets/img/' . $nombre,
+                    'url_imagen'   => $nombre,
                     'es_principal' => 1,
                 ]);
             }
