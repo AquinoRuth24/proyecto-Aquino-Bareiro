@@ -40,6 +40,9 @@
                     <li class="nav-item me-3">
                         <a class="nav-link" href="<?= site_url('admin/consultas') ?>">Consultas</a>
                     </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="<?= site_url('admin/facturas') ?>">Facturas</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav ms-auto d-flex align-items-center flex-row">
                     <span class="navbar-text text-white me-3">
@@ -97,18 +100,17 @@
                     </div>
                 </a>
             </div>
-        </div>
-        <div class="col-md-3">
-            <a href="<?= site_url('admin/facturas') ?>" class="text-decoration-none text-dark">
-                <div class="card text-center shadow-sm">
-                    <div class="card-body">
-                        <i class="bi bi-file-earmark-text-fill display-4"></i>
-                        <h5 class="card-title mt-2">Facturas</h5>
+            <div class="col-md-3">
+                <a href="<?= site_url('admin/facturas') ?>" class="text-decoration-none text-dark">
+                    <div class="card text-center shadow-sm">
+                        <div class="card-body">
+                            <i class="bi bi-file-earmark-text-fill display-4"></i>
+                            <h5 class="card-title mt-2">Facturas</h5>
+                        </div>
                     </div>
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
-
     </div>
     <script src="<?= base_url('public/assets/js/bootstrap.js') ?>"></script>
 </body>

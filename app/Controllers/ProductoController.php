@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\ProductoModel;
 use App\Models\ImagenModel;
+use App\Models\CategoriaModel; // NUEVO
 use CodeIgniter\Controller;
 
 class ProductoController extends Controller
@@ -29,38 +30,41 @@ class ProductoController extends Controller
     public function crearProducto()
     {
         helper(['form']);
+        $categoriaModel = new CategoriaModel();
+        $categorias = $categoriaModel->findAll();
 
         if ($this->request->getMethod() === 'post') {
             $validationRules = [
-                'nombre' => 'required|min_length[3]',
-                'descripcion' => 'required|min_length[3]',
-                'precio' => 'required|decimal',
-                'stock'  => 'required|integer'
+                'nombre'        => 'required|min_length[3]',
+                'descripcion'   => 'required|min_length[3]',
+                'precio'        => 'required|decimal',
+                'stock'         => 'required|integer',
+                'id_categoria'  => 'required|integer',
             ];
 
-            if (! $this->validate($validationRules)) {
+            if (!$this->validate($validationRules)) {
                 return view('pages/productos/crearProducto', [
-                    'validation' => $this->validator
+                    'validation' => $this->validator,
+                    'categorias' => $categorias
                 ]);
             }
 
             $productoModel = new ProductoModel();
             $imagenModel = new ImagenModel();
 
-            // Insertar producto
             $datos = [
-                'nombre'      => $this->request->getPost('nombre'),
-                'descripcion' => $this->request->getPost('descripcion'),
-                'precio'      => $this->request->getPost('precio'),
-                'stock'       => $this->request->getPost('stock'),
-                'activo'      => 1
+                'nombre'        => $this->request->getPost('nombre'),
+                'descripcion'   => $this->request->getPost('descripcion'),
+                'precio'        => $this->request->getPost('precio'),
+                'stock'         => $this->request->getPost('stock'),
+                'activo'        => 1,
+                'id_categoria'  => $this->request->getPost('id_categoria'),
             ];
 
             if (!$productoModel->insert($datos)) {
                 dd($productoModel->errors());
             }
 
-            // Obtener el ID insertado
             $idProducto = $productoModel->insertID();
 
             $imagen = $this->request->getFile('imagen');
@@ -69,8 +73,8 @@ class ProductoController extends Controller
                 $imagen->move('uploads', $nombreImagen);
 
                 $imagenModel->insert([
-                    'id_producto' => $idProducto,
-                    'url_imagen'  => $nombreImagen,
+                    'id_producto'  => $idProducto,
+                    'url_imagen'   => $nombreImagen,
                     'es_principal' => 1
                 ]);
             }
@@ -79,46 +83,51 @@ class ProductoController extends Controller
             return redirect()->to('/producto');
         }
 
-        return view('pages/productos/crearProducto');
+        return view('pages/productos/crearProducto', ['categorias' => $categorias]);
     }
-
 
     public function editarProducto($id)
     {
         helper(['form', 'url']);
         $productoModel = new ProductoModel();
         $imagenModel = new ImagenModel();
+        $categoriaModel = new CategoriaModel();
+        $categorias = $categoriaModel->findAll();
 
         if ($this->request->getMethod() === 'post') {
             $validationRules = [
-                'nombre' => 'required|min_length[3]',
-                'precio' => 'required|decimal',
-                'stock'  => 'required|integer'
+                'nombre'        => 'required|min_length[3]',
+                'descripcion'   => 'required|min_length[3]',
+                'precio'        => 'required|decimal',
+                'stock'         => 'required|integer',
+                'id_categoria'  => 'required|integer',
             ];
-            if (! $this->validate($validationRules)) {
+
+            if (!$this->validate($validationRules)) {
                 $producto = $productoModel->find($id);
                 $imagenes = $imagenModel->where('id_producto', $id)->findAll();
                 return view('pages/productos/editarProducto', [
-                    'producto' => $producto,
-                    'imagenes' => $imagenes,
+                    'producto'   => $producto,
+                    'imagenes'   => $imagenes,
+                    'categorias' => $categorias,
                     'validation' => $this->validator
                 ]);
             }
+
             $productoModel->update($id, [
-                'nombre'      => $this->request->getPost('nombre'),
-                'descripcion' => $this->request->getPost('descripcion'),
-                'precio'      => $this->request->getPost('precio'),
-                'stock'       => $this->request->getPost('stock'),
+                'nombre'        => $this->request->getPost('nombre'),
+                'descripcion'   => $this->request->getPost('descripcion'),
+                'precio'        => $this->request->getPost('precio'),
+                'stock'         => $this->request->getPost('stock'),
+                'id_categoria'  => $this->request->getPost('id_categoria'),
             ]);
 
             $imagenArchivo = $this->request->getFile('imagen');
             if ($imagenArchivo && $imagenArchivo->isValid() && !$imagenArchivo->hasMoved()) {
-                // Marcar todas las imágenes existentes como no principales
                 $imagenModel->where('id_producto', $id)
                     ->set(['es_principal' => 0])
                     ->update();
 
-                // Guardar la nueva imagen como principal
                 $nombre = $imagenArchivo->getRandomName();
                 $imagenArchivo->move('public/assets/img/', $nombre);
 
@@ -131,12 +140,16 @@ class ProductoController extends Controller
 
             return redirect()->to('/producto');
         }
+
         $producto = $productoModel->find($id);
         $imagenes = $imagenModel->where('id_producto', $id)->findAll();
 
-        return view('pages/productos/editarProducto', ['producto' => $producto, 'imagenes' => $imagenes]);
+        return view('pages/productos/editarProducto', [
+            'producto'   => $producto,
+            'imagenes'   => $imagenes,
+            'categorias' => $categorias
+        ]);
     }
-
     public function eliminarProducto($id)
     {
         $productoModel = new ProductoModel();

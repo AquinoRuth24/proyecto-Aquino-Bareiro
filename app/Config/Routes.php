@@ -17,13 +17,12 @@ $routes->get('/terminosYUsos', 'Home::terminosYUsos');
 $routes->get('/registrar', 'Home::registrar');
 
 // Catálogo y carrito
-$routes->get('/catalogoProductos', 'Home::catalogoProductos');
 $routes->get('/carrito', 'Home::carrito');
 
 // Consultas
 $routes->get('/consulta', 'ConsultaController::index'); 
 $routes->post('/consultas/enviar', 'ConsultaController::enviar');
-$routes->get('mis-consultas', 'ConsultaController::misConsultas');
+$routes->get('mis_consultas', 'ConsultaController::misConsultas');
 
 // Consultas de usuarios (página de administración)
 $routes->get('admin/consultas', 'ConsultaController::admin');
@@ -60,7 +59,6 @@ $routes->match(['get', 'post'], 'registrar', 'usuarioController::registrar');
 // productos
 $routes->get('/producto', 'ProductoController::index');
 $routes->match(['get', 'post'], '/producto/crearProducto', 'ProductoController::crearProducto');
-$routes->match(['get', 'post'], '/producto/editarProducto/(:num)', 'ProductoController::editarProducto/$1');
 $routes->get('/producto/eliminarProducto/(:num)', 'ProductoController::eliminarProducto/$1');
 $routes->get('/producto/productosEliminados', 'ProductoController::productosEliminados');
 $routes->get('/producto/restaurarProducto/(:num)', 'ProductoController::restaurarProducto/$1');
@@ -69,3 +67,5 @@ $routes->get('/producto/restaurarProducto/(:num)', 'ProductoController::restaura
 $routes->get('admin/ventas', 'AdministradorController::ventas');
 $routes->get('admin/facturas', 'AdministradorController::facturas');
 
+// Categorías
+$routes->get('catalogoProductos', 'CatalogoController::index');
