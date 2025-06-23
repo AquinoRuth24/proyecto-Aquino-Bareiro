@@ -80,7 +80,11 @@ class UsuarioController extends Controller
                 'isLoggedIn' => true,
             ]);
             //var_dump(session()->get());
-            return redirect()->to('/usuarioLogeado')->with('message', 'Inicio de sesión exitoso.');
+            if ($usuario['id_perfil'] == 3) {
+                return redirect()->to('/administrador')->with('message', 'Bienvenido al panel administrador.');
+            } else {
+                return redirect()->to('/usuarioLogeado')->with('message', 'Inicio de sesión exitoso.');
+            }
         }
         // Si no es una solicitud POST, mostrar el formulario de inicio de sesión
         return view('templates/main-layout', [
