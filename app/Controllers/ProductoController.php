@@ -40,6 +40,7 @@ class ProductoController extends Controller
                 'precio'        => 'required|decimal',
                 'stock'         => 'required|integer',
                 'id_categoria'  => 'required|integer',
+                'imagen'        => 'uploaded[imagen]|is_image[imagen]|mime_in[imagen,image/jpg,image/jpeg,image/png]'
             ];
 
             if (!$this->validate($validationRules)) {
@@ -62,15 +63,18 @@ class ProductoController extends Controller
             ];
 
             if (!$productoModel->insert($datos)) {
-                dd($productoModel->errors());
+                dd('Error al insertar producto', $productoModel->errors());
             }
 
             $idProducto = $productoModel->insertID();
-
             $imagen = $this->request->getFile('imagen');
+
             if ($imagen && $imagen->isValid() && !$imagen->hasMoved()) {
                 $nombreImagen = $imagen->getRandomName();
-                $imagen->move(FCPATH . 'assets/img/', $nombreImagen);
+
+                if (!$imagen->move(FCPATH . 'assets/img/', $nombreImagen)) {
+                    dd('Error al mover la imagen');
+                }
 
                 $imagenModel->insert([
                     'id_producto'  => $idProducto,
@@ -176,3 +180,78 @@ class ProductoController extends Controller
         return redirect()->to('producto')->with('success', 'Producto restaurado');
     }
 }
+
+/*
+
+namespace App\Controllers;
+
+use App\Models\productoModel;
+use App\Models\categoriaModel;
+use CodeIgniter\Controller;
+
+class ProductoController extends Controller
+{
+    public function crearProducto()
+    {
+        helper(['form']);
+
+        $categoriaModel = new categoriaModel();
+        $data['categorias'] = $categoriaModel->findAll();
+
+        $dato = ['titulo' => 'Alta de Producto'];
+
+        return view('front/head_view', $dato)
+            . view('front/nav_view')
+            . view('back/alta_producto_view', $data)
+            . view('front/footer_view');
+    }
+
+    public function store()
+    {
+        $input = $this->validate([
+            'nombre_prod'   => 'required|min_length[3]',
+            'marca'         => 'required|min_length[1]',
+            'imagen'        => 'uploaded[imagen]|is_image[imagen]|mime_in[imagen,image/jpg,image/jpeg,image/png]',
+            'categoria_id'  => 'is_not_unique[categorias.id]',
+            'precio'        => 'required|numeric',
+            'precio_vta'    => 'required|numeric',
+            'stock'         => 'required|integer',
+            'stock_min'     => 'required|integer',
+        ]);
+
+        if (!$input) {
+            $categoriaModel = new categoriaModel();
+            $data['categorias'] = $categoriaModel->findAll();
+            $data['validation'] = $this->validator;
+
+            $dato = ['titulo' => 'Alta de Producto'];
+
+            return view('front/head_view', $dato)
+                . view('front/nav_view')
+                . view('back/alta_producto_view', $data)
+                . view('front/footer_view');
+        }
+
+        $img = $this->request->getFile('imagen');
+        $nombre_aleatorio = $img->getRandomName();
+        $img->move(ROOTPATH . 'public/assets/uploads', $nombre_aleatorio);
+
+        $data = [
+            'nombre_prod'   => $this->request->getVar('nombre_prod'),
+            'marca'         => $this->request->getVar('marca'),
+            'imagen'        => $nombre_aleatorio,
+            'categoria_id'  => $this->request->getVar('categoria_id'),
+            'precio'        => $this->request->getVar('precio'),
+            'precio_vta'    => $this->request->getVar('precio_vta'),
+            'stock'         => $this->request->getVar('stock'),
+            'stock_min'     => $this->request->getVar('stock_min'),
+        ];
+
+        $productoModel = new productoModel();
+        $productoModel->insert($data);
+
+        session()->setFlashdata('success', 'Alta Exitosa...');
+        return redirect()->to('/producto');
+    }
+}
+*/

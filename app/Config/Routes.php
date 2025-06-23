@@ -16,9 +16,6 @@ $routes->get('/informacionContacto', 'Home::informacionContacto');
 $routes->get('/terminosYUsos', 'Home::terminosYUsos');
 $routes->get('/registrar', 'Home::registrar');
 
-// Catálogo y carrito
-$routes->get('/carrito', 'Home::carrito');
-
 // Consultas
 $routes->get('/consulta', 'ConsultaController::index'); 
 $routes->post('/consultas/enviar', 'ConsultaController::enviar');
@@ -69,3 +66,12 @@ $routes->get('admin/facturas', 'AdministradorController::facturas');
 
 // Categorías
 $routes->get('catalogoProductos', 'CatalogoController::index');
+
+// carrito de compras
+$routes->get('carrito', 'CarritoController::ver');
+$routes->get('carrito/agregar/(:num)', 'CarritoController::agregar/$1');
+$routes->get('carrito/eliminar/(:num)', 'CarritoController::eliminar/$1');
+$routes->get('carrito/vaciar', 'CarritoController::vaciar');
+//$routes->get('carrito/comprar', 'CarritoController::comprar');
+$routes->get('pages/gracias', 'CarritoController::gracias');
+$routes->get('mi-historial', 'CarritoController::historial');

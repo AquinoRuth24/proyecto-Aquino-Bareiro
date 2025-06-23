@@ -1,21 +1,30 @@
-<head>
-    <title> Catalogo De Productos</title>
-    <link href="<?= base_url('public/assets/css/bootstrap.min.css') ?>" rel="stylesheet">
-    <link href="<?= base_url('public/assets/css/miestilo.css') ?>" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="icon" href="<?= base_url('public/assets/img/marca.ico') ?>" type="image/x-icon">
-</head>
+<?= $this->extend('templates/main-layout') ?>
+<?= $this->section('contenido') ?>
 
-<section class="calalogo">
+<?php if (session()->getFlashdata('success')): ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <?= session()->getFlashdata('success') ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+    </div>
+<?php endif; ?>
+
+<?php if (session()->getFlashdata('error')): ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <?= session()->getFlashdata('error') ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+    </div>
+<?php endif; ?>
+
+<div class="catalogo">
     <h1>Catalogo De Productos</h1>
-</section>
+</div>
 <div class="container-fluid">
     <div class="row">
         <!-- FILTROS LATERALES -->
         <aside class="col-md-3 mb-4">
             <form method="get" action="<?= site_url('catalogoProductos') ?>" class="filtros p-3 bg-white shadow rounded">
                 <h5 class="mb-3"><i class="bi bi-funnel"></i> Filtros</h5>
-                
+
                 <div class="mb-3">
                     <input type="text" name="nombre" class="form-control" placeholder="Nombre del producto" value="<?= esc($filtros['nombre'] ?? '') ?>">
                 </div>
@@ -59,7 +68,10 @@
                                 <h5 class="card-title"><?= esc($prod['nombre']) ?></h5>
                                 <p class="card-text text-primary fw-bold">$<?= esc($prod['precio']) ?></p>
                                 <p class="text-muted small"><?= esc($categoriasMap[$prod['id_categoria']] ?? 'Sin categoría') ?></p>
-                                <button class="btn btn-outline-primary w-100"><i class="bi bi-cart-plus"></i> Comprar</button>
+                                <a href="<?= base_url('carrito/agregar/' . $prod['id_producto']) ?>" class="btn btn-outline-primary w-100">
+                                    <i class="bi bi-cart-plus"></i> Agregar al carrito
+                                </a>
+
                             </div>
                         </div>
                     </div>
@@ -71,3 +83,4 @@
 
 
 <script src="<?= base_url('public/assets/js/bootstrap.js') ?>"></script>
+<?= $this->endSection() ?>

@@ -53,7 +53,8 @@ class CatalogoController extends BaseController
                 'categoria'   => $categoria,
                 'precio_min'  => $precioMin,
                 'precio_max'  => $precioMax
-            ]
+            ],
+            'title' => 'Catálogo de Productos - Yesi Yohi Store'
         ]);
     }
 }
