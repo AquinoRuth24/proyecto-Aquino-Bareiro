@@ -1,21 +1,19 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\ProductoModel;
+use App\Models\ImagenModel; 
 
 class Home extends BaseController
 {
     public function index(): string
     {
-        $db = \Config\Database::connect();
-
+      $productoModel = new ProductoModel();
+        $imagenModel = new ImagenModel();
         // Se obtienen los productos de la base de datos
-        $query = $db->query('SELECT * FROM productos');
-        $productos = $query->getResultArray();
-
-        // Se obtienen las imnagenes de los productos
-        $query = $db->query('SELECT * FROM imagen');
-        $imagenesBd = $query->getResultArray();
-
+        $productos = $productoModel->findAll();
+        // Se obtienen las imágenes de los productos
+        $imagenesBd = $imagenModel->findAll();
         // Se combinan los productos con sus imágenes
         $imagenes = [];
         foreach ($imagenesBd as $imagen) {
@@ -135,13 +133,13 @@ class Home extends BaseController
     }*/
 
 
-    /*public function guardarUsuario()
+    public function guardarUsuario()
     {
         $nombre = $this->request->getPost('nombre');
         $email = $this->request->getPost('email');
         $telefono = $this->request->getPost('telefono');
-        $contrasena = $this->request->getPost('contrasena');
-    }*/
+        $password = $this->request->getPost('password');
+    }
 
 
 

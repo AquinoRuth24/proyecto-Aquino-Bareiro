@@ -14,24 +14,24 @@
         <div class="container mt-4">
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control border border-dark text-dark" id="nombre" name="nombre" required
+                <input type="text" class="form-control border border-dark text-dark" id="nombre" name="nombre" value="<?= old('nombre') ?>" required
                     minlength="3" maxlength="50" title="Nombre" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$">
             </div>
 
             <div class="mb-3">
                 <label for="apellido" class="form-label">Apellido</label>
-                <input type="text" class="form-control border border-dark text-dark" id="apellido" name="apellido" required
+                <input type="text" class="form-control border border-dark text-dark" id="apellido" name="apellido" value="<?= old('apellido') ?>" required
                     minlength="3" maxlength="50" title="Apellido" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$">
             </div>
             <div class="mb-3">
                 <label for="telefono" class="form-label">Teléfono</label>
-                <input type="tel" class="form-control border border-dark text-dark" id="telefono" name="telefono" required
+                <input type="tel" class="form-control border border-dark text-dark" id="telefono" name="telefono" value="<?= old('telefono') ?>" required
                     pattern="[0-9]{10}" title="Número de teléfono válido de 10 dígitos" maxlength="10" minlength="10"
                     placeholder="Ej: 3794222684">
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Correo electrónico</label>
-                <input type="email" class="form-control border border-dark text-dark" id="email" name="email" required
+                <input type="email" class="form-control border border-dark text-dark" id="email" name="email" value="<?= old('email') ?>" required
                     title="email valido" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" maxlength="50" minlength="10">
             </div>
             <div>

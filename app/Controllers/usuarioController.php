@@ -2,7 +2,9 @@
 
 namespace App\Controllers;
 
-use App\Models\usuarioModel;
+use App\Models\UsuarioModel;
+use App\Models\ProductoModel;
+use App\Models\ImagenModel;
 use CodeIgniter\Controller;
 
 class UsuarioController extends Controller
@@ -45,35 +47,36 @@ class UsuarioController extends Controller
 
     public function login()
     {
-        helper(['form']);
+        $request = service('request');
         // Verificar si el usuario ya está logueado
-        if (session()->get('logged_in')) {
+        if (session()->get('isLoggedIn')) {
             return redirect()->to('/usuarioLogeado')->with('message', 'Ya estás logueado.');
         }
-        // Si no está logueado, mostrar el formulario de inicio de sesión
-        if ($this->request->getMethod() === 'post') {
-            $email = $this->request->getPost('email');
-            $password = $this->request->getPost('password');
+        // Datos cargados desde el formulario de inicio de sesión
+        if ($request->getMethod() === 'POST') {
+            $email = $request->getPost('email');
+            $password = $request->getPost('password');
 
             $usuarioModel = new usuarioModel();
             $usuario = $usuarioModel->where('email', $email)->first();
             // Verificar si el usuario existe y la contraseña es correcta
 
             if (!$usuario) {
-                return "usuariocorrecto";
+                return redirect()->back()->withInput()->with('error', 'Usuario no encontrado.');
             }
             // Verificar la contraseña
             if (!password_verify($password, $usuario['password'])) {
-                return "usuariocorrecto";
+                return redirect()->back()->withInput()->with('error', 'Contraseña incorrecta.');
             }
             // Iniciar sesión
             $session = session();
             $session->set([
                 'user_id' => $usuario['id_usuario'],
+                'id_perfil' => $usuario['id_perfil'],
                 'nombre' => $usuario['nombre'],
                 'email' => $usuario['email'],
                 'telefono' => $usuario['telefono'],
-                'logged_in' => true
+                'isLoggedIn' => true,
             ]);
             //var_dump(session()->get());
             return redirect()->to('/usuarioLogeado')->with('message', 'Inicio de sesión exitoso.');
@@ -93,16 +96,12 @@ class UsuarioController extends Controller
         if (!session()->get('isLoggedIn')) {
             return redirect()->to('/login')->with('error', 'Debes iniciar sesión para acceder a esta página.');
         }
-        $db = \Config\Database::connect();
-
+        $productoModel = new ProductoModel();
+        $imagenModel = new ImagenModel();
         // Se obtienen los productos de la base de datos
-        $query = $db->query('SELECT * FROM producto');
-        $productos = $query->getResultArray();
-
-        // Se obtienen las imnagenes de los productos
-        $query = $db->query('SELECT * FROM imagen_producto');
-        $imagenesBd = $query->getResultArray();
-
+        $productos = $productoModel->findAll();
+        // Se obtienen las imágenes de los productos
+        $imagenesBd = $imagenModel->findAll();
         // Se combinan los productos con sus imágenes
         $imagenes = [];
         foreach ($imagenesBd as $imagen) {

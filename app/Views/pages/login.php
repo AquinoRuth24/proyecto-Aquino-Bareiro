@@ -17,8 +17,8 @@
             <form action="<?= base_url('/login') ?>" method="post">
                 <div class="input-group mb-3">
                     <span class="input-group-text"><i class="bi bi-person"></i></span>
-                    <input type="email" class="form-control" id="email" name="email" required title="email valido"
-                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" maxlength="50" minlength="10" placeholder="Correo electronico">
+                    <input type="email" class="form-control" id="email" name="email" required title="ingrese un email valido"
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" maxlength="50" minlength="10" placeholder="Correo electronico" value="<?= old('email') ?>" required>
                 </div>
 
                 <div class="input-group mb-3">
