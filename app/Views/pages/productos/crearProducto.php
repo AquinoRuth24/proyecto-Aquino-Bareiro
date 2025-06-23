@@ -9,7 +9,7 @@
     <h2 class="text-center mb-3">Crear Producto</h2>
 </div>
 
-<form action="<?= site_url('producto/crearProducto') ?>" method="post" enctype="multipart/form-data">
+<form action="<?= site_url('producto/crearProducto') ?>" method="POST" enctype="multipart/form-data">
     <div class="crearProducto">
         <div class="mb-3">
             <label class="form-label">Nombre:</label>

@@ -14,7 +14,7 @@
     </div>
 <?php endif; ?>
 <div style="   margin-left: 60;margin-right: auto; ">
-    <form action="<?= site_url('producto/editarProducto/' . $producto['id_producto']) ?>" method="post" enctype="multipart/form-data">
+    <form action="<?= site_url('producto/editarProducto/' . $producto['id_producto']) ?>" method="POST" enctype="multipart/form-data">
         <div class="mb-3">
             <label>Nombre:</label>
             <input type="text" name="nombre" class="form-control" value="<?= esc($producto['nombre']) ?>" required>
