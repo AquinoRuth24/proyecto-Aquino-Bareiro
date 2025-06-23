@@ -13,7 +13,7 @@
     <div class="crearProducto">
         <div class="mb-3">
             <label class="form-label">Nombre:</label>
-            <input type="text" name="nombre" class="form-control" placeholder="Ej: Remera blanca" style="color: black;"required>
+            <input type="text" name="nombre" class="form-control" placeholder="Ej: Remera blanca" style="color: black;" required>
         </div>
         <div class="mb-3">
             <label class="form-label">Descripción:</label>
@@ -28,17 +28,30 @@
             <input type="number" name="stock" class="form-control" required>
         </div>
         <div class="mb-3">
-            <label class="form-label">Imagen principal:</label>
-            <input type="file" name="imagen" class="form-control" accept="image/*" required>
+            <label for="id_categoria" class="form-label">Categoría</label>
+            <select name="id_categoria" id="id_categoria" class="form-select" required>
+                <option value="">Selecciona una categoría</option>
+                <?php foreach ($categorias as $categoria): ?>
+                    <option value="<?= $categoria['id_categoria'] ?>">
+                        <?= esc($categoria['nombre']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
         </div>
-        <div class="d-flex justify-content-between">
-            <button type="submit" class="btn btn-success">
-                <i class="bi bi-check-circle"></i> Guardar
-            </button>
-            <a href="<?= site_url('producto') ?>" class="btn btn-secondary">
-                <i class="bi bi-x-circle"></i> Cancelar
-            </a>
-        </div>
+
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Imagen principal:</label>
+        <input type="file" name="imagen" class="form-control" accept="image/*" required>
+    </div>
+    <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-success">
+            <i class="bi bi-check-circle"></i> Guardar
+        </button>
+        <a href="<?= site_url('producto') ?>" class="btn btn-secondary">
+            <i class="bi bi-x-circle"></i> Cancelar
+        </a>
+    </div>
     </div>
 </form>
 

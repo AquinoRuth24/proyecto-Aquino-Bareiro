@@ -5,14 +5,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 
-<div class="container mt-4;" style="text-align: center;" >
+<div class="container mt-4;" style="text-align: center;">
     <h1>Editar Producto</h1>
 </div>
-    <?php if (isset($validation)): ?>
-        <div class="alert alert-danger">
-            <?= $validation->listErrors() ?>
-        </div>
-    <?php endif; ?>
+<?php if (isset($validation)): ?>
+    <div class="alert alert-danger">
+        <?= $validation->listErrors() ?>
+    </div>
+<?php endif; ?>
 <div style="   margin-left: 60;margin-right: auto; ">
     <form action="<?= site_url('producto/editarProducto/' . $producto['id_producto']) ?>" method="post" enctype="multipart/form-data">
         <div class="mb-3">
@@ -30,6 +30,17 @@
         <div class="mb-3">
             <label>Stock:</label>
             <input type="number" name="stock" class="form-control" value="<?= esc($producto['stock']) ?>" required>
+        </div>
+        <div class="mb-3">
+            <label for="id_categoria" class="form-label">Categoría</label>
+            <select name="id_categoria" class="form-select">
+                <option value="">Seleccione categoría</option>
+                <?php foreach ($categorias as $categoria): ?>
+                    <option value="<?= $categoria['id_categoria'] ?>" <?= set_value('id_categoria', $producto['id_categoria']) == $categoria['id_categoria'] ? 'selected' : '' ?>>
+                        <?= esc($categoria['nombre']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
         </div>
         <div class="mb-3">
             <label>Imagen nueva (opcional):</label>

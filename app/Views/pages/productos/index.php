@@ -41,7 +41,7 @@
                     <td><?= esc($producto['stock']) ?></td>
                     <td>
                         <?php if (!empty($imagenes[$producto['id_producto']])): ?>
-                            <img src="<?= base_url('assets/img' . $imagenes[$producto['id_producto']][0]) ?>" width="50" class="rounded">
+                            <img src="<?= base_url('public/assets/img/' . $imagenes[$producto['id_producto']][0]) ?>" width="50" class="rounded">
                         <?php else: ?>
                             <span class="text-muted">Sin imagen</span>
                         <?php endif ?>
@@ -65,7 +65,7 @@
     $(document).ready(function() {
         $('#tabla-productos').DataTable({
             language: {
-                url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json"
+                url: "<?= base_url('public/assets/i18n/es-ES.json') ?>"
             }
         });
     });
