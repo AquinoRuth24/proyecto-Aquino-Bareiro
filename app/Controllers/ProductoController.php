@@ -33,7 +33,7 @@ class ProductoController extends Controller
         $categoriaModel = new CategoriaModel();
         $categorias = $categoriaModel->findAll();
 
-        if ($this->request->getMethod() === 'post') {
+        if ($this->request->getMethod() === 'POST') {
             $validationRules = [
                 'nombre'        => 'required|min_length[3]',
                 'descripcion'   => 'required|min_length[3]',
@@ -98,7 +98,7 @@ class ProductoController extends Controller
         $categoriaModel = new CategoriaModel();
         $categorias = $categoriaModel->findAll();
 
-        if ($this->request->getMethod() === 'post') {
+        if ($this->request->getMethod() === 'POST') {
             $validationRules = [
                 'nombre'        => 'required|min_length[3]',
                 'descripcion'   => 'required|min_length[3]',
@@ -180,78 +180,3 @@ class ProductoController extends Controller
         return redirect()->to('producto')->with('success', 'Producto restaurado');
     }
 }
-
-/*
-
-namespace App\Controllers;
-
-use App\Models\productoModel;
-use App\Models\categoriaModel;
-use CodeIgniter\Controller;
-
-class ProductoController extends Controller
-{
-    public function crearProducto()
-    {
-        helper(['form']);
-
-        $categoriaModel = new categoriaModel();
-        $data['categorias'] = $categoriaModel->findAll();
-
-        $dato = ['titulo' => 'Alta de Producto'];
-
-        return view('front/head_view', $dato)
-            . view('front/nav_view')
-            . view('back/alta_producto_view', $data)
-            . view('front/footer_view');
-    }
-
-    public function store()
-    {
-        $input = $this->validate([
-            'nombre_prod'   => 'required|min_length[3]',
-            'marca'         => 'required|min_length[1]',
-            'imagen'        => 'uploaded[imagen]|is_image[imagen]|mime_in[imagen,image/jpg,image/jpeg,image/png]',
-            'categoria_id'  => 'is_not_unique[categorias.id]',
-            'precio'        => 'required|numeric',
-            'precio_vta'    => 'required|numeric',
-            'stock'         => 'required|integer',
-            'stock_min'     => 'required|integer',
-        ]);
-
-        if (!$input) {
-            $categoriaModel = new categoriaModel();
-            $data['categorias'] = $categoriaModel->findAll();
-            $data['validation'] = $this->validator;
-
-            $dato = ['titulo' => 'Alta de Producto'];
-
-            return view('front/head_view', $dato)
-                . view('front/nav_view')
-                . view('back/alta_producto_view', $data)
-                . view('front/footer_view');
-        }
-
-        $img = $this->request->getFile('imagen');
-        $nombre_aleatorio = $img->getRandomName();
-        $img->move(ROOTPATH . 'public/assets/uploads', $nombre_aleatorio);
-
-        $data = [
-            'nombre_prod'   => $this->request->getVar('nombre_prod'),
-            'marca'         => $this->request->getVar('marca'),
-            'imagen'        => $nombre_aleatorio,
-            'categoria_id'  => $this->request->getVar('categoria_id'),
-            'precio'        => $this->request->getVar('precio'),
-            'precio_vta'    => $this->request->getVar('precio_vta'),
-            'stock'         => $this->request->getVar('stock'),
-            'stock_min'     => $this->request->getVar('stock_min'),
-        ];
-
-        $productoModel = new productoModel();
-        $productoModel->insert($data);
-
-        session()->setFlashdata('success', 'Alta Exitosa...');
-        return redirect()->to('/producto');
-    }
-}
-*/
