@@ -30,14 +30,45 @@
                 </div>
 
                 <div class="mb-3">
-                    <select name="categoria" class="form-select">
-                        <option value="">Todas las categorías</option>
-                        <?php foreach ($categorias as $cat): ?>
-                            <option value="<?= $cat['id_categoria'] ?>" <?= ($filtros['categoria'] ?? '') == $cat['id_categoria'] ? 'selected' : '' ?>>
-                                <?= esc($cat['nombre']) ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
+                    <div class="accordion mb-3" id="accordionCategoriasPrincipal">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingCategorias">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCategorias" aria-expanded="false" aria-controls="collapseCategorias">
+                Categorías
+            </button>
+        </h2>
+        <div id="collapseCategorias" class="accordion-collapse collapse" aria-labelledby="headingCategorias">
+            <div class="accordion-body">
+                <div class="accordion" id="subcategoriasAccordion">
+                    <?php foreach ($categoriasAgrupadas as $grupo => $nombres): ?>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="heading<?= md5($grupo) ?>">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?= md5($grupo) ?>" aria-expanded="false" aria-controls="collapse<?= md5($grupo) ?>">
+                                    <?= esc($grupo) ?>
+                                </button>
+                            </h2>
+                            <div id="collapse<?= md5($grupo) ?>" class="accordion-collapse collapse" aria-labelledby="heading<?= md5($grupo) ?>" data-bs-parent="#subcategoriasAccordion">
+                                <div class="accordion-body">
+                                    <?php foreach ($categorias as $cat): ?>
+                                        <?php if (in_array($cat['nombre'], $nombres)): ?>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="categoria" value="<?= $cat['id_categoria'] ?>" id="cat<?= $cat['id_categoria'] ?>" <?= ($filtros['categoria'] ?? '') == $cat['id_categoria'] ? 'checked' : '' ?>>
+                                                <label class="form-check-label" for="cat<?= $cat['id_categoria'] ?>">
+                                                    <?= esc($cat['nombre']) ?>
+                                                </label>
+                                            </div>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
                 </div>
 
                 <div class="mb-3">

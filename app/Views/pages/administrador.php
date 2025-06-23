@@ -11,6 +11,9 @@
 </head>
 
 <body>
+    <?php if (session()->getFlashdata('message')): ?>
+        <div class="alert alert-success"><?= session()->getFlashdata('message') ?></div>
+    <?php endif; ?>
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark"
         style="background: linear-gradient(to right, #0f0c29, #302b63, #24243e);">

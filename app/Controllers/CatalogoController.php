@@ -44,11 +44,22 @@ class CatalogoController extends BaseController
 
         $productos  = $builder->findAll();
         $categorias = $categoriaModel->findAll();
+        // Agrupar categorías en secciones
+        $categoriasAgrupadas = [
+            'Por tipo de público' => ['Hombres', 'Mujeres', 'Niños', 'Niñas', 'Bebés', 'Unisex'],
+            'Parte superior' => ['Remeras', 'Camisas', 'Buzos', 'Camperas', 'Chalecos', 'Tops', 'Sweaters', 'Poleras'],
+            'Parte inferior' => ['Jeans', 'Pantalones', 'Calzas', 'Shorts', 'Faldas'],
+            'Para dormir' => ['Pijamas', 'Batas'],
+            'Otros' => ['Conjuntos', 'Trajes', 'Uniformes'],
+            'Por temporada' => ['Primavera / Verano', 'Otoño / Invierno'],
+            'Por estilo o actividad' => ['Deportivo', 'Urbano', 'Elegante', 'Casual', 'Formal', 'Trabajo', 'Playa'],
+        ];
 
         return view('pages/catalogoProductos', [
-            'productos'  => $productos,
-            'categorias' => $categorias,
-            'filtros'    => [
+            'productos'          => $productos,
+            'categorias'         => $categorias,
+            'categoriasAgrupadas' => $categoriasAgrupadas,
+            'filtros'            => [
                 'nombre'      => $nombre,
                 'categoria'   => $categoria,
                 'precio_min'  => $precioMin,
