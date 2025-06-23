@@ -6,6 +6,7 @@ use App\Models\UsuarioModel;
 use App\Models\ProductoModel;
 use App\Models\ImagenModel;
 use CodeIgniter\Controller;
+use App\Models\CabeceraModel;
 
 class UsuarioController extends Controller
 {
@@ -123,5 +124,20 @@ class UsuarioController extends Controller
                 'imagenes' => $imagenes
             ])
         ]);
+    }
+    public function index()
+    {
+        $usuarioModel = new UsuarioModel();
+        $cabeceraModel = new CabeceraModel();
+
+        $usuarios = $usuarioModel->findAll();
+
+        foreach ($usuarios as &$usuario) {
+            $usuario['compras'] = $cabeceraModel
+                ->where('id_usuario', $usuario['id_usuario'])
+                ->countAllResults();
+        }
+
+        return view('pages/admin/usuarios', ['usuarios' => $usuarios]);
     }
 }

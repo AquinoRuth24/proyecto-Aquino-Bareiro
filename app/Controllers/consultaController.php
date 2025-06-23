@@ -73,13 +73,13 @@ class ConsultaController extends BaseController
         $usuarioModel = new UsuarioModel();
 
         $consultas = $consultaModel
-            ->select('consultas.*, usuarios.nombre as usuario_nombre, usuarios.email as usuario_email')
-            ->join('usuarios', 'usuarios.id_usuario = consultas.id_usuario', 'left')
+            ->select('consulta.*, usuario.nombre as usuario_nombre, usuario.email as usuario_email')
+            ->join('usuario', 'usuario.id_usuario = consulta.id_usuario', 'left')
             ->orderBy('fecha_envio', 'DESC')
             ->findAll();
 
 
-        return view('admin/consultas', [
+        return view('pages/admin/consultas', [
             'title' => 'Consultas de usuarios',
             'consultas' => $consultas
         ]);
@@ -88,11 +88,11 @@ class ConsultaController extends BaseController
     {
         $this->consultaModel->update($id, ['contestado' => 1]);
 
-        return redirect()->to(site_url('admin/consultas'))->with('mensaje', 'Consulta marcada como contestada.');
+        return redirect()->to(site_url('pages/admin/consultas'))->with('mensaje', 'Consulta marcada como contestada.');
     }
     public function responder($id)
     {
-        if ($this->request->getMethod() === 'post') {
+        if ($this->request->getMethod() === 'POST') {
             $respuesta = $this->request->getPost('respuesta');
 
             $this->consultaModel->update($id, [
@@ -100,14 +100,14 @@ class ConsultaController extends BaseController
                 'contestado' => 1
             ]);
 
-            return redirect()->to(site_url('admin/consultas'))->with('mensaje', 'Consulta respondida correctamente.');
+            return redirect()->to(site_url('pages/admin/consultas'))->with('mensaje', 'Consulta respondida correctamente.');
         }
 
-        $consulta = $this->consultaModel->find($id);
+        $consultas = $this->consultaModel->find($id);
 
-        return view('admin/responder_consulta', [
+        return view('pages/admin/responder_consulta', [
             'title' => 'Responder Consulta',
-            'consulta' => $consulta
+            'consultas' => $consultas
         ]);
     }
 }

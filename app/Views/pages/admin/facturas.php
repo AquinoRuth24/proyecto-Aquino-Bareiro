@@ -22,8 +22,8 @@
             <select name="cliente" class="form-select">
                 <option value="">Todos</option>
                 <?php foreach ($usuarios as $usuario): ?>
-                    <option value="<?= $usuario['id'] ?>" <?= $clienteSeleccionado == $usuario['id'] ? 'selected' : '' ?>>
-                        <?= esc($usuario['nombre']) ?> (<?= esc($usuario['usuario']) ?>)
+                    <option value="<?= $usuario['id_usuario'] ?>" <?= $clienteSeleccionado == $usuario['id_usuario'] ? 'selected' : '' ?>>
+                        <?= esc($usuario['nombre']) ?> (<?= esc($usuario['email']) ?>)
                     </option>
                 <?php endforeach; ?>
             </select>

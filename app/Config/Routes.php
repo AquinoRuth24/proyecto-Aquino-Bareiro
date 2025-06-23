@@ -42,6 +42,7 @@ $routes->get('/logout', 'UsuarioController::logout');
 
 $routes->post('/registrar', 'UsuarioController::registrar');
 $routes->get('/administrador', 'AdministradorController::administrador');
+$routes->get('usuario', 'UsuarioController::index');
 
 
 // Página principal después del login
