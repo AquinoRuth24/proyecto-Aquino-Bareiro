@@ -96,6 +96,7 @@ class ProductoController extends Controller
         $productoModel = new ProductoModel();
         $imagenModel = new ImagenModel();
         $categoriaModel = new CategoriaModel();
+
         $categorias = $categoriaModel->findAll();
 
         if ($this->request->getMethod() === 'POST') {
@@ -118,6 +119,7 @@ class ProductoController extends Controller
                 ]);
             }
 
+            // Actualizar datos del producto
             $productoModel->update($id, [
                 'nombre'        => $this->request->getPost('nombre'),
                 'descripcion'   => $this->request->getPost('descripcion'),
@@ -126,25 +128,29 @@ class ProductoController extends Controller
                 'id_categoria'  => $this->request->getPost('id_categoria'),
             ]);
 
-            $imagenArchivo = $this->request->getFile('imagen');
-            if ($imagenArchivo && $imagenArchivo->isValid() && !$imagenArchivo->hasMoved()) {
-                $imagenModel->where('id_producto', $id)
-                    ->set(['es_principal' => 0])
-                    ->update();
+            // Procesar múltiples imágenes (si se suben)
+            $imagenes = $this->request->getFiles()['imagenes'] ?? [];
 
-                $nombre = $imagenArchivo->getRandomName();
-                $imagenArchivo->move(FCPATH . 'assets/img/', $nombre);
+            $esPrimera = true; // Solo una se marcará como principal si no hay ninguna
+            foreach ($imagenes as $img) {
+                if ($img->isValid() && !$img->hasMoved()) {
+                    $nombre = $img->getRandomName();
+                    $img->move(FCPATH . 'assets/img/', $nombre);
 
-                $imagenModel->insert([
-                    'id_producto'  => $id,
-                    'url_imagen'   => $nombre,
-                    'es_principal' => 1,
-                ]);
+                    $imagenModel->insert([
+                        'id_producto'  => $id,
+                        'url_imagen'   => $nombre,
+                        'es_principal' => $esPrimera ? 1 : 0
+                    ]);
+
+                    $esPrimera = false;
+                }
             }
 
-            return redirect()->to('/producto');
+            return redirect()->to('/producto')->with('success', 'Producto actualizado con éxito');
         }
 
+        // Método GET: cargar formulario con datos actuales
         $producto = $productoModel->find($id);
         $imagenes = $imagenModel->where('id_producto', $id)->findAll();
 
