@@ -4,6 +4,8 @@
     <link href="<?= base_url('public/assets/css/bootstrap.min.css') ?>" rel="stylesheet">
     <link href="<?= base_url('public/assets/css/miestilo.css') ?>" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" href="<?= base_url('public/assets/img/marca.ico') ?>" type="image/x-icon">
+
 </head>
 
 <!-- NAVBAR -->
@@ -50,9 +52,16 @@
         </div>
     </div>
 </nav>
+<div class="container mt-4 p-3 rounded" style="background-color: darkgray;">
+    <div class="d-flex justify-content-between align-items-center position-relative">
+        <div style="width: 150px;"></div>
+        <h2 class="mb-0 text-center flex-grow-1"><i class="bi bi-cart-check"></i>Gestion De Ventas</h2>
+        <a href="<?= site_url('administrador') ?>" class="btn btn-primary">
+            <i class="bi bi-arrow-left-circle"></i> Volver
+        </a>
+    </div>
+</div>
 <div class="container mt-5">
-    <h2 class="mb-4"><i class="bi bi-cart-check"></i> Gestión de Ventas</h2>
-
     <table class="table table-bordered table-striped table-hover text-center">
         <thead class="table-primary">
             <tr>

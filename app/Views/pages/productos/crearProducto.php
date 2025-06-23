@@ -1,12 +1,20 @@
 <head>
-    <title>Productos</title>
+    <title>Dar De Alta Productos</title>
     <link href="<?= base_url('public/assets/css/bootstrap.min.css') ?>" rel="stylesheet">
     <link href="<?= base_url('public/assets/css/miestilo.css') ?>" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" href="<?= base_url('public/assets/img/marca.ico') ?>" type="image/x-icon">
+
 </head>
 
-<div class="container mt-4" style="background-color:darkgray;">
-    <h2 class="text-center mb-3">Crear Producto</h2>
+<div class="container mt-4 p-3 rounded" style="background-color: darkgray;">
+    <div class="d-flex justify-content-between align-items-center position-relative">
+        <div style="width: 150px;"></div>
+        <h2 class="mb-0 text-center flex-grow-1">Dar De Alta Un Producto</h2>
+        <a href="<?= site_url('producto') ?>" class="btn btn-primary">
+            <i class="bi bi-arrow-left-circle"></i> Volver
+        </a>
+    </div>
 </div>
 
 <form action="<?= site_url('producto/crearProducto') ?>" method="POST" enctype="multipart/form-data">
@@ -38,22 +46,20 @@
                 <?php endforeach; ?>
             </select>
         </div>
-
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Imagen principal:</label>
-        <input type="file" name="imagen" class="form-control" accept="image/*" required>
-    </div>
-    <div class="d-flex justify-content-between">
-        <button type="submit" class="btn btn-success">
-            <i class="bi bi-check-circle"></i> Guardar
-        </button>
-        <a href="<?= site_url('producto') ?>" class="btn btn-secondary">
-            <i class="bi bi-x-circle"></i> Cancelar
-        </a>
+        <div class="mb-3">
+            <label class="form-label">Imagen principal:</label>
+            <input type="file" name="imagen" class="form-control" accept="image/*" required>
+        </div>
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-success">
+                <i class="bi bi-check-circle"></i> Guardar
+            </button>
+            <a href="<?= site_url('producto') ?>" class="btn btn-secondary">
+                <i class="bi bi-x-circle"></i> Cancelar
+            </a>
+        </div>
     </div>
     </div>
 </form>
-
 
 <script src="<?= base_url('public/assets/js/bootstrap.js') ?>"></script>

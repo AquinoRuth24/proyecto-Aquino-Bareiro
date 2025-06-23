@@ -1,8 +1,10 @@
 <head>
-    <title>Productos</title>
+    <title>Consultas Realizadas</title>
     <link href="<?= base_url('public/assets/css/bootstrap.min.css') ?>" rel="stylesheet">
     <link href="<?= base_url('public/assets/css/miestilo.css') ?>" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" href="<?= base_url('public/assets/img/marca.ico') ?>" type="image/x-icon">
+
 </head>
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark"
@@ -48,9 +50,16 @@
         </div>
     </div>
 </nav>
+<div class="container mt-4 p-3 rounded" style="background-color: darkgray;">
+    <div class="d-flex justify-content-between align-items-center position-relative">
+        <div style="width: 150px;"></div>
+        <h2 class="mb-0 text-center flex-grow-1">Consultas Realizadas</h2>
+        <a href="<?= site_url('administrador') ?>" class="btn btn-primary">
+            <i class="bi bi-arrow-left-circle"></i> Volver
+        </a>
+    </div>
+</div>
 <div class="container mt-4">
-    <h2>Consultas de Usuarios</h2>
-
     <?php if (session()->getFlashdata('mensaje')): ?>
         <div class="alert alert-success"><?= session()->getFlashdata('mensaje') ?></div>
     <?php endif ?>

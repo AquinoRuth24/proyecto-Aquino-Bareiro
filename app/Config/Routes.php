@@ -57,6 +57,7 @@ $routes->match(['get', 'post'], '/producto/crearProducto', 'ProductoController::
 $routes->get('/producto/eliminarProducto/(:num)', 'ProductoController::eliminarProducto/$1');
 $routes->get('/producto/productosEliminados', 'ProductoController::productosEliminados');
 $routes->get('/producto/restaurarProducto/(:num)', 'ProductoController::restaurarProducto/$1');
+$routes->match(['get', 'post'], '/producto/editarProducto/(:num)', 'ProductoController::editarProducto/$1');
 
 // ventas
 $routes->get('admin/ventas', 'AdministradorController::ventas');

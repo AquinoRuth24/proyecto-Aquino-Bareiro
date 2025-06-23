@@ -1,20 +1,29 @@
 <head>
-    <title>Productos</title>
+    <title>Editar Productos</title>
     <link href="<?= base_url('public/assets/css/bootstrap.min.css') ?>" rel="stylesheet">
     <link href="<?= base_url('public/assets/css/miestilo.css') ?>" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" href="<?= base_url('public/assets/img/marca.ico') ?>" type="image/x-icon">
+
 </head>
 
-<div class="container mt-4;" style="text-align: center;">
-    <h1>Editar Producto</h1>
-</div>
 <?php if (isset($validation)): ?>
     <div class="alert alert-danger">
         <?= $validation->listErrors() ?>
     </div>
 <?php endif; ?>
-<div style="   margin-left: 60;margin-right: auto; ">
-    <form action="<?= site_url('producto/editarProducto/' . $producto['id_producto']) ?>" method="POST" enctype="multipart/form-data">
+<<div class="container mt-4 p-3 rounded" style="background-color: darkgray;">
+    <div class="d-flex justify-content-between align-items-center position-relative">
+        <div style="width: 150px;"></div>
+        <h2 class="mb-0 text-center flex-grow-1">Editar Un Producto</h2>
+        <a href="<?= site_url('producto') ?>" class="btn btn-primary">
+            <i class="bi bi-arrow-left-circle"></i> Volver
+        </a>
+    </div>
+</div>
+
+<from action="<?= site_url('producto/editarProducto/' . $producto['id_producto']) ?>" method="POST" enctype="multipart/form-data">
+    <div class="crearProducto">
         <div class="mb-3">
             <label>Nombre:</label>
             <input type="text" name="nombre" class="form-control" value="<?= esc($producto['nombre']) ?>" required>
@@ -54,6 +63,7 @@
         <?php endif ?>
         <button type="submit" class="btn btn-primary">Actualizar</button>
         <a href="<?= site_url('producto') ?>" class="btn btn-secondary">Cancelar</a>
+    </div>
     </form>
-</div>
-<script src="<?= base_url('public/assets/js/bootstrap.js') ?>"></script>
+
+    <script src="<?= base_url('public/assets/js/bootstrap.js') ?>"></script>
