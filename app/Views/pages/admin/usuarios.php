@@ -108,7 +108,6 @@
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <script src="<?= base_url('public/assets/js/bootstrap.bundle.min.js') ?>"></script>
 
-<<<<<<< HEAD
     <!-- Activar DataTable -->
     <script>
         $(document).ready(function() {
@@ -125,18 +124,3 @@
 </body>
 
 </html>
-=======
-<!-- Activar DataTable -->
-<script>
-    $(document).ready(function() {
-        $('#tablaUsuarios').DataTable({
-            language: {
-                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
-            },
-            order: [
-                [3, 'desc']
-            ] // Orden por "Total de Compras" descendente
-        });
-    });
-</script>
->>>>>>> 56e77e98ad86eb7cb504d13350df63b8ee3f7327
