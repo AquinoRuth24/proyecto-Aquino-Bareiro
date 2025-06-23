@@ -28,7 +28,7 @@ $routes->match(['get', 'post'], 'consultas/responder/(:num)', 'ConsultaControlle
 
 
 //$routes->get('/consultas', 'Home::consultas');
-$routes->get('/consultas', 'Consultas::index'); 
+$routes->get('/consultas', 'ConsultaController::index'); 
 $routes->post('/consultas/enviar', 'Consultas::enviar');
 
 // Formulario de contacto (formulario separado de consultas)
@@ -57,6 +57,7 @@ $routes->match(['get', 'post'], '/producto/crearProducto', 'ProductoController::
 $routes->get('/producto/eliminarProducto/(:num)', 'ProductoController::eliminarProducto/$1');
 $routes->get('/producto/productosEliminados', 'ProductoController::productosEliminados');
 $routes->get('/producto/restaurarProducto/(:num)', 'ProductoController::restaurarProducto/$1');
+$routes->match(['get', 'post'], '/producto/editarProducto/(:num)', 'ProductoController::editarProducto/$1');
 
 // ventas
 $routes->get('admin/ventas', 'AdministradorController::ventas');

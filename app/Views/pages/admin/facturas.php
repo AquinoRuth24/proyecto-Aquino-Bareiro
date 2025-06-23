@@ -1,6 +1,6 @@
 <head>
     <meta charset="UTF-8">
-    <title>Ventas Realizadas</title>
+    <title>Facturas</title>
     <link href="<?= base_url('public/assets/css/bootstrap.min.css') ?>" rel="stylesheet">
     <link href="<?= base_url('public/assets/css/miestilo.css') ?>" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -50,9 +50,24 @@
         </div>
     </div>
 </nav>
+<<<<<<< HEAD
 <h2>Facturas de compras</h2>
+=======
+<div class="container mt-4 p-3 rounded" style="background-color: darkgray;">
+    <div class="d-flex justify-content-between align-items-center position-relative">
+        <div style="width: 150px;"></div>
+        <h2 class="mb-0 text-center flex-grow-1">Facturas De Clientes</h2>
+        <a href="<?= site_url('administrador') ?>" class="btn btn-primary">
+            <i class="bi bi-arrow-left-circle"></i> Volver
+        </a>
+    </div>
+</div>
+>>>>>>> 56e77e98ad86eb7cb504d13350df63b8ee3f7327
 <div class="container mt-4">
-    <h2 class="mb-4">Facturas del Día</h2>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0" style="font-size: 2rem;">Facturas del Día</h2>
+        <span class="text-muted" style="font-size: 1.5rem;"><?= date('d/m/Y') ?></span>
+    </div>
 
     <!-- FILTROS -->
     <form method="get" class="row g-3 mb-4">
