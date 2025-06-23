@@ -57,7 +57,7 @@ $actualMethod = service('router')->methodName();
                     </a>
                 </li>
                 <!-- Mostrar nombre de usuario y botón de cerrar sesión si está logueado -->
-                <?php if (session()->get('logged_in')): ?>
+                <?php if (session()->get('isLoggedIn')): ?>
                     <span class="navbar-text text-white me-3">
                         Hola, <?= session('user_name') ?>!
                     </span>

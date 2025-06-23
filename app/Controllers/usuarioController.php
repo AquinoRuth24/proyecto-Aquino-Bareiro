@@ -81,6 +81,11 @@ class UsuarioController extends Controller
             //var_dump(session()->get());
             return redirect()->to('/usuarioLogeado')->with('message', 'Inicio de sesión exitoso.');
         }
+        // Si no es una solicitud POST, mostrar el formulario de inicio de sesión
+        return view('templates/main-layout', [
+            'title' => 'Inicio Sesion- Yesi Yohi Store',
+            'content' => view('pages/login')
+        ]);
     }
 
 

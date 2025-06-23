@@ -99,39 +99,6 @@ class Home extends BaseController
             'content' => view('pages/registrar')
         ]);
     }
-    /*public function usuarioLogeado()
-    {
-        if (!session()->get('isLoggedIn')) {
-            return redirect()->to('/login')->with('error', 'Debes iniciar sesión para acceder a esta página.');
-        }
-        $db = \Config\Database::connect();
-
-        // Se obtienen los productos de la base de datos
-        $query = $db->query('SELECT * FROM producto');
-        $productos = $query->getResultArray();
-
-        // Se obtienen las imnagenes de los productos
-        $query = $db->query('SELECT * FROM imagen_producto');
-        $imagenesBd = $query->getResultArray();
-
-        // Se combinan los productos con sus imágenes
-        $imagenes = [];
-        foreach ($imagenesBd as $imagen) {
-            $imagenes[$imagen['id_producto']][] = $imagen['url_imagen'];
-        }
-
-        return view('templates/main-layout', [
-            'title' => 'Bienvenido - Yesi Yohi Store',
-            'content' => view('pages/usuarioLogeado', [
-                'nombre' => session('nombre'),
-                'email' => session('email'),
-                'telefono' => session('telefono'),
-                'productos' => $productos,
-                'imagenes' => $imagenes
-            ])
-        ]);
-    }*/
-
 
     public function guardarUsuario()
     {

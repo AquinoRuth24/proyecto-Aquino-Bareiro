@@ -15,7 +15,7 @@ $routes->get('/comercializacion', 'Home::comercializacion');
 $routes->get('/informacionContacto', 'Home::informacionContacto');
 $routes->get('/terminosYUsos', 'Home::terminosYUsos');
 $routes->get('/registrar', 'Home::registrar');
-
+//$routes->get('/login', 'Home::login');
 // Consultas
 $routes->get('/consulta', 'ConsultaController::index'); 
 $routes->post('/consultas/enviar', 'ConsultaController::enviar');
@@ -39,7 +39,7 @@ $routes->match(['get', 'post'], '/login', 'UsuarioController::login');
 $routes->get('/logout', 'UsuarioController::logout');
 
 // Registro de usuarios y administradores
-//$routes->get('/registrar', 'UsuarioController::registrar');
+
 $routes->post('/registrar', 'UsuarioController::registrar');
 $routes->get('/administrador', 'AdministradorController::administrador');
 
@@ -49,9 +49,6 @@ $routes->get('/principal', 'Principal::index');
 $routes->get('/usuarioLogeado', 'UsuarioController::usuarioLogeado');
 
 
-// Si deseas permitir ambas formas de acceso (GET y POST) a login o registrar:
-/*$routes->match(['get', 'post'], 'login', 'UsuarioController::login');
-$routes->match(['get', 'post'], 'registrar', 'UsuarioController::registrar');*/
 
 // productos
 $routes->get('/producto', 'ProductoController::index');
