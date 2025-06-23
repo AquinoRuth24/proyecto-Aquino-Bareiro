@@ -47,6 +47,13 @@ $actualMethod = service('router')->methodName();
                             href="<?= base_url('consultas  ') ?>">Consulta</a>
                     </li>
                 <?php endif; ?>
+                <!-- Mostrar "Administración" solo si el usuario es administrador -->
+                <?php if (session()->get('isLoggedIn') && session()->get('id_perfil') === '3'): ?>
+                    <li class="nav-item">
+                        <a class="nav-link <?= ($actualMethod === 'administrador') ? 'active text-success' : '' ?>"
+                            href="<?= base_url('administrador') ?>">Administración</a>
+                    </li>
+                    <?php endif; ?>
             </ul>
 
             <!-- Íconos de usuario y carrito -->

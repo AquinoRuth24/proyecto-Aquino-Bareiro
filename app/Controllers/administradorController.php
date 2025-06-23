@@ -8,13 +8,27 @@ use App\Models\ProductoModel;
 use App\Models\VentaModel;
 use App\Models\DetalleVentaModel;
 use App\Models\UsuarioModel;
+use App\Models\ImagenModel;
+
 
 class AdministradorController extends BaseController
 {
     public function administrador()
     {
+        if(!session()->get('isLoggedIn') || session()->get('id_perfil') !== '3') {
+            return redirect()->to('/login')->with('error', 'Acceso no autorizado.');
+        }
         $productoModel = new ProductoModel();
-        $productos = $productoModel->where('activo', 1)->findAll();
+        $imagenModel = new ImagenModel();
+        // Se obtienen los productos de la base de datos
+        $productos = $productoModel->findAll();
+        // Se obtienen las imágenes de los productos
+        $imagenesBd = $imagenModel->findAll();
+        // Se combinan los productos con sus imágenes
+        $imagenes = [];
+        foreach ($imagenesBd as $imagen) {
+            $imagenes[$imagen['id_producto']][] = $imagen['url_imagen'];
+        }
 
         return view('pages/administrador', ['productos' => $productos]);
     }

@@ -15,7 +15,7 @@ $routes->get('/comercializacion', 'Home::comercializacion');
 $routes->get('/informacionContacto', 'Home::informacionContacto');
 $routes->get('/terminosYUsos', 'Home::terminosYUsos');
 $routes->get('/registrar', 'Home::registrar');
-//$routes->get('/login', 'Home::login');
+
 // Consultas
 $routes->get('/consulta', 'ConsultaController::index'); 
 $routes->post('/consultas/enviar', 'ConsultaController::enviar');
