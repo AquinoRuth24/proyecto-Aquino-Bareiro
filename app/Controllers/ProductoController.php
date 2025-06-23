@@ -58,8 +58,8 @@ class ProductoController extends Controller
                 'descripcion'   => $this->request->getPost('descripcion'),
                 'precio'        => $this->request->getPost('precio'),
                 'stock'         => $this->request->getPost('stock'),
-                'activo'        => 1,
                 'id_categoria'  => $this->request->getPost('id_categoria'),
+                'activo'        => 1 // Por defecto, el producto está activo al crearse
             ];
 
             if (!$productoModel->insert($datos)) {
@@ -133,7 +133,7 @@ class ProductoController extends Controller
                     ->update();
 
                 $nombre = $imagenArchivo->getRandomName();
-                $imagenArchivo->move(FCPATH . 'assets/img/', $nombre);
+                $imagenArchivo->move(FCPATH . '/assets/img/', $nombre);
 
                 $imagenModel->insert([
                     'id_producto'  => $id,

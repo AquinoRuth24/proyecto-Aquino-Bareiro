@@ -15,7 +15,7 @@ class AdministradorController extends BaseController
 {
     public function administrador()
     {
-        if(!session()->get('isLoggedIn') || session()->get('id_perfil') !== '3') {
+        if (!session()->get('isLoggedIn') || session()->get('id_perfil') !== '3') {
             return redirect()->to('/login')->with('error', 'Acceso no autorizado.');
         }
         $productoModel = new ProductoModel();

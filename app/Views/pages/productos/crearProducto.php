@@ -3,6 +3,7 @@
     <link href="<?= base_url('public/assets/css/bootstrap.min.css') ?>" rel="stylesheet">
     <link href="<?= base_url('public/assets/css/miestilo.css') ?>" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" href="<?= base_url('public/assets/img/marca.ico') ?>" type="image/x-icon">
 </head>
 
 <div class="container mt-4" style="background-color:darkgray;">
@@ -21,11 +22,11 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Precio:</label>
-            <input type="number" name="precio" class="form-control" required>
+            <input type="number" name="precio" class="form-control" min="0" required>
         </div>
         <div class="mb-3">
             <label class="form-label">Stock:</label>
-            <input type="number" name="stock" class="form-control" required>
+            <input type="number" name="stock" class="form-control" min="1" required>
         </div>
         <div class="mb-3">
             <label for="id_categoria" class="form-label">Categoría</label>

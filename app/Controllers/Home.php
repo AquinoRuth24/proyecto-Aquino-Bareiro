@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Controllers;
+
 use App\Models\ProductoModel;
-use App\Models\ImagenModel; 
+use App\Models\ImagenModel;
 
 class Home extends BaseController
 {
     public function index(): string
     {
-      $productoModel = new ProductoModel();
+        $productoModel = new ProductoModel();
         $imagenModel = new ImagenModel();
         // Se obtienen los productos de la base de datos
         $productos = $productoModel->findAll();
@@ -99,6 +100,7 @@ class Home extends BaseController
             'content' => view('pages/registrar')
         ]);
     }
+
 
     public function guardarUsuario()
     {
