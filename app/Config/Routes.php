@@ -70,6 +70,8 @@ $routes->get('catalogoProductos', 'CatalogoController::index');
 $routes->get('carrito', 'CarritoController::ver');
 $routes->get('carrito/agregar/(:num)', 'CarritoController::agregar/$1');
 $routes->get('carrito/eliminar/(:num)', 'CarritoController::eliminar/$1');
+$routes->get('/mis-facturas', 'usuarioController::facturas');
+
 $routes->get('carrito/vaciar', 'CarritoController::vaciar');
 //$routes->get('carrito/comprar', 'CarritoController::comprar');
 $routes->get('pages/gracias', 'CarritoController::gracias');

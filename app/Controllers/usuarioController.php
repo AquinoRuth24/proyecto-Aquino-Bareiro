@@ -7,6 +7,7 @@ use App\Models\ProductoModel;
 use App\Models\ImagenModel;
 use CodeIgniter\Controller;
 use App\Models\CabeceraModel;
+use App\Models\Carrito_compraModel;
 
 class UsuarioController extends Controller
 {
@@ -143,4 +144,19 @@ class UsuarioController extends Controller
 
         return view('pages/admin/usuarios', ['usuarios' => $usuarios]);
     }
+
+public function facturas()
+{
+    if (!session()->get('isLoggedIn')) {
+        return redirect()->to('/login')->with('error', 'Debes iniciar sesión para ver tus compras');
+    }
+
+    $id_usuario = session()->get('id_usuario');
+    $carritoCompraModel = new Carrito_compraModel();
+
+    $facturas = $carritoCompraModel->where('id_usuario', $id_usuario)->findAll();
+
+    return view('pages/mis-facturas', ['facturas' => $facturas]);
+}
+
 }

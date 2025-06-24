@@ -106,17 +106,42 @@ margin: 2rem;
 }
 
 .crearProducto{
-    background-color:#fff; 
-    padding: 20px; 
-    border-radius: 10px; 
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
-    margin: 10px auto; 
-    max-width: 800px; 
-    margin-left: 60;    
-    margin-right: auto;    
+background-color:#fff; 
+padding: 20px; 
+border-radius: 10px; 
+box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+margin: 10px auto; 
+max-width: 800px; 
+margin-left: 60;    
+margin-right: auto;    
 }
 
 .catalogo{
-    background-color:#053f75;
-    text-align: center;
+background-color:#053f75;
+text-align: center;
+}
+
+.gracias-container {
+max-width: 700px;
+margin: 60px auto;
+padding: 40px;
+border-radius: 10px;
+background: #f9f9f9;
+box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+text-align: center;
+}
+
+.gracias-container img {
+max-width: 250px;
+margin-bottom: 25px;
+}
+
+.gracias-container p {
+font-size: 1.1rem;
+color: #333;
+}
+
+.gracias-container a {
+text-decoration: none;
+color: #fff;
 }
