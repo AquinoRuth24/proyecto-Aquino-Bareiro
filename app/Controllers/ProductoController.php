@@ -11,6 +11,10 @@ class ProductoController extends Controller
 {
     public function index()
     {
+        if (!session()->get('isLoggedIn') || session()->get('id_perfil') !== '3') {
+            return redirect()->to('/login')->with('error', 'Acceso no autorizado.');
+        }
+
         $productoModel = new ProductoModel();
         $imagenModel = new ImagenModel();
 
@@ -29,6 +33,9 @@ class ProductoController extends Controller
 
     public function crearProducto()
     {
+        if (!session()->get('isLoggedIn') || session()->get('id_perfil') !== '3') {
+            return redirect()->to('/login')->with('error', 'Acceso no autorizado.');
+        }
         helper(['form']);
         $categoriaModel = new CategoriaModel();
         $categorias = $categoriaModel->findAll();
@@ -92,6 +99,9 @@ class ProductoController extends Controller
 
     public function editarProducto($id)
     {
+        if (!session()->get('isLoggedIn') || session()->get('id_perfil') !== '3') {
+            return redirect()->to('/login')->with('error', 'Acceso no autorizado.');
+        }
         helper(['form', 'url']);
         $productoModel = new ProductoModel();
         $imagenModel = new ImagenModel();
@@ -162,6 +172,9 @@ class ProductoController extends Controller
     }
     public function eliminarProducto($id)
     {
+        if (!session()->get('isLoggedIn') || session()->get('id_perfil') !== '3') {
+            return redirect()->to('/login')->with('error', 'Acceso no autorizado.');
+        }
         $productoModel = new ProductoModel();
 
         $productoModel->update($id, ['activo' => 0]);
@@ -171,6 +184,9 @@ class ProductoController extends Controller
 
     public function productosEliminados()
     {
+        if (!session()->get('isLoggedIn') || session()->get('id_perfil') !== '3') {
+            return redirect()->to('/login')->with('error', 'Acceso no autorizado.');
+        }
         $productoModel = new ProductoModel();
 
         $productos = $productoModel->where('activo', 0)->findAll();
@@ -180,6 +196,9 @@ class ProductoController extends Controller
 
     public function restaurarProducto($id)
     {
+        if (!session()->get('isLoggedIn') || session()->get('id_perfil') !== '3') {
+            return redirect()->to('/login')->with('error', 'Acceso no autorizado.');
+        }
         $productoModel = new ProductoModel();
         $productoModel->update($id, ['activo' => 1]);
 

@@ -17,11 +17,18 @@ class ConsultaController extends BaseController
 
     public function index()
     {
+        $datosUsuario = [];
+
+        if (session()->has('usuario')) {
+            $datosUsuario['nombre'] = session('nombre') ?? '';
+            $datosUsuario['email']  = session('email') ?? '';
+        }
         return view('templates/main-layout', [
-            'title' => 'Consultas - Yesi Yohi Store',
-            'content' => view('pages/consultas')
+            'title'   => 'Consultas - Yesi Yohi Store',
+            'content' => view('pages/consultas', ['datosUsuario' => $datosUsuario])
         ]);
     }
+
 
     public function enviar()
     {
@@ -50,25 +57,28 @@ class ConsultaController extends BaseController
         return redirect()->to('/consultas');
     }
     public function misConsultas()
-{
-    $usuarioId = session()->get('id_usuario');
-    if (!$usuarioId) {
-        return redirect()->to('/login')->with('mensaje', 'Debes iniciar sesión para ver tus consultas.');
+    {
+        $usuarioId = session()->get('id_usuario');
+        if (!$usuarioId) {
+            return redirect()->to('/login')->with('mensaje', 'Debes iniciar sesión para ver tus consultas.');
+        }
+
+        $consultas = $this->consultaModel
+            ->where('id_usuario', $usuarioId)
+            ->orderBy('fecha_envio', 'DESC')
+            ->findAll();
+
+        return view('pages/mis_consultas', [
+            'title' => 'Mis Consultas',
+            'consultas' => $consultas
+        ]);
     }
-
-    $consultas = $this->consultaModel
-        ->where('id_usuario', $usuarioId)
-        ->orderBy('fecha_envio', 'DESC')
-        ->findAll();
-
-    return view('pages/mis_consultas', [
-        'title' => 'Mis Consultas',
-        'consultas' => $consultas
-    ]);
-}
 
     public function admin()
     {
+        if (!session()->get('isLoggedIn') || session()->get('id_perfil') !== '3') {
+            return redirect()->to('/login')->with('error', 'Acceso no autorizado.');
+        }
         $consultaModel = new ConsultaModel();
         $usuarioModel = new UsuarioModel();
 

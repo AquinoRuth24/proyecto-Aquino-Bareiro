@@ -31,43 +31,43 @@
 
                 <div class="mb-3">
                     <div class="accordion mb-3" id="accordionCategoriasPrincipal">
-    <div class="accordion-item">
-        <h2 class="accordion-header" id="headingCategorias">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCategorias" aria-expanded="false" aria-controls="collapseCategorias">
-                Categorías
-            </button>
-        </h2>
-        <div id="collapseCategorias" class="accordion-collapse collapse" aria-labelledby="headingCategorias">
-            <div class="accordion-body">
-                <div class="accordion" id="subcategoriasAccordion">
-                    <?php foreach ($categoriasAgrupadas as $grupo => $nombres): ?>
                         <div class="accordion-item">
-                            <h2 class="accordion-header" id="heading<?= md5($grupo) ?>">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?= md5($grupo) ?>" aria-expanded="false" aria-controls="collapse<?= md5($grupo) ?>">
-                                    <?= esc($grupo) ?>
+                            <h2 class="accordion-header" id="headingCategorias">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCategorias" aria-expanded="false" aria-controls="collapseCategorias">
+                                    Categorías
                                 </button>
                             </h2>
-                            <div id="collapse<?= md5($grupo) ?>" class="accordion-collapse collapse" aria-labelledby="heading<?= md5($grupo) ?>" data-bs-parent="#subcategoriasAccordion">
+                            <div id="collapseCategorias" class="accordion-collapse collapse" aria-labelledby="headingCategorias">
                                 <div class="accordion-body">
-                                    <?php foreach ($categorias as $cat): ?>
-                                        <?php if (in_array($cat['nombre'], $nombres)): ?>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="categoria" value="<?= $cat['id_categoria'] ?>" id="cat<?= $cat['id_categoria'] ?>" <?= ($filtros['categoria'] ?? '') == $cat['id_categoria'] ? 'checked' : '' ?>>
-                                                <label class="form-check-label" for="cat<?= $cat['id_categoria'] ?>">
-                                                    <?= esc($cat['nombre']) ?>
-                                                </label>
+                                    <div class="accordion" id="subcategoriasAccordion">
+                                        <?php foreach ($categoriasAgrupadas as $grupo => $nombres): ?>
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header" id="heading<?= md5($grupo) ?>">
+                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?= md5($grupo) ?>" aria-expanded="false" aria-controls="collapse<?= md5($grupo) ?>">
+                                                        <?= esc($grupo) ?>
+                                                    </button>
+                                                </h2>
+                                                <div id="collapse<?= md5($grupo) ?>" class="accordion-collapse collapse" aria-labelledby="heading<?= md5($grupo) ?>" data-bs-parent="#subcategoriasAccordion">
+                                                    <div class="accordion-body">
+                                                        <?php foreach ($categorias as $cat): ?>
+                                                            <?php if (in_array($cat['nombre'], $nombres)): ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="categoria" value="<?= $cat['id_categoria'] ?>" id="cat<?= $cat['id_categoria'] ?>" <?= ($filtros['categoria'] ?? '') == $cat['id_categoria'] ? 'checked' : '' ?>>
+                                                                    <label class="form-check-label" for="cat<?= $cat['id_categoria'] ?>">
+                                                                        <?= esc($cat['nombre']) ?>
+                                                                    </label>
+                                                                </div>
+                                                            <?php endif; ?>
+                                                        <?php endforeach; ?>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        <?php endif; ?>
-                                    <?php endforeach; ?>
+                                        <?php endforeach; ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                    </div>
 
                 </div>
 
@@ -80,18 +80,28 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary w-100"><i class="bi bi-search"></i> Buscar</button>
+                <a href="<?= site_url('catalogoProductos') ?>" class="btn btn-secondary w-100 mt-2"><i class="bi bi-x-circle"></i> Limpiar</a>
+
             </form>
         </aside>
 
         <!-- LISTADO DE PRODUCTOS -->
         <section class="col-md-9">
+            <div class="d-flex justify-content-end mb-3">
+                <a href="<?= site_url('catalogoProductos') ?>" class="btn btn-outline-secondary btn-sm">
+                    <i class="bi bi-x-circle"></i> Limpiar filtros
+                </a>
+            </div>
             <div class="row">
+
                 <?php foreach ($productos as $prod): ?>
                     <div class="col-md-4 mb-4">
                         <div class="card product-card shadow-sm">
                             <div class="position-relative">
                                 <img src="<?= base_url('assets/img/' . esc($prod['url_imagen'] ?? 'default.jpg')) ?>" class="card-img-top" alt="<?= esc($prod['nombre']) ?>">
-                                <?php if (!empty($prod['etiqueta'])): ?>
+                                <?php if ($prod['stock'] <= 3): ?>
+                                    <span class="badge bg-warning text-dark position-absolute top-0 start-0 m-2">¡Últimas unidades!</span>
+                                <?php elseif (!empty($prod['etiqueta'])): ?>
                                     <span class="badge bg-danger position-absolute top-0 start-0 m-2"><?= esc($prod['etiqueta']) ?></span>
                                 <?php endif; ?>
                             </div>
@@ -114,4 +124,12 @@
 
 
 <script src="<?= base_url('public/assets/js/bootstrap.js') ?>"></script>
+<script>
+    document.querySelectorAll('input[name="categoria"]').forEach(radio => {
+        radio.addEventListener('change', function () {
+            this.closest('form').submit();
+        });
+    });
+</script>
+
 <?= $this->endSection() ?>
