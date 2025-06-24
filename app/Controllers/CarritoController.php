@@ -117,7 +117,9 @@ class CarritoController extends Controller
 
     public function gracias()
     {
-        return view('pages/gracias');
+        return view('pages/gracias',[
+            'title' => 'Gracias por su compra',
+        ]);
     }
     public function historial()
     {

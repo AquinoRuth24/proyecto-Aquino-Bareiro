@@ -1,6 +1,11 @@
-<?= $this->extend('templates/main-layout') ?>
+<head>
+    <title>Graias Por Su Compra</title>
+    <link href="<?= base_url('public/assets/css/bootstrap.min.css') ?>" rel="stylesheet">
+    <link href="<?= base_url('public/assets/css/miestilo.css') ?>" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" href="<?= base_url('public/assets/img/marca.ico') ?>" type="image/x-icon">
 
-<?= $this->section('contenido') ?>
+</head>
 <div class="gracias-container">
     <img src="<?= base_url('public/assets/img/graciasPorSuCompra.png') ?>" alt="Gracias por tu compra">
 
@@ -18,4 +23,4 @@
         Volver al catálogo
     </a>
 </div>
-<?= $this->endSection() ?>
+<script src="<?= base_url('public/assets/js/bootstrap.js') ?>"></script>
