@@ -51,7 +51,7 @@ class UsuarioController extends Controller
         $request = service('request');
         // Verificar si el usuario ya está logueado
         if (session()->get('isLoggedIn')) {
-            return redirect()->to('/usuarioLogeado')->with('message', 'Ya estás logueado.');
+            return redirect()->to('/')->with('message', 'Ya estás logueado.');
         }
         // Datos cargados desde el formulario de inicio de sesión
         if ($request->getMethod() === 'POST') {
@@ -79,11 +79,10 @@ class UsuarioController extends Controller
                 'telefono' => $usuario['telefono'],
                 'isLoggedIn' => true,
             ]);
-            //var_dump(session()->get());
             if ($usuario['id_perfil'] == 3) {
                 return redirect()->to('/administrador')->with('message', 'Bienvenido al panel administrador.');
             } else {
-                return redirect()->to('/usuarioLogeado')->with('message', 'Inicio de sesión exitoso.');
+                return redirect()->to('/')->with('message', 'Inicio de sesión exitoso.');
             }
         }
         // Si no es una solicitud POST, mostrar el formulario de inicio de sesión

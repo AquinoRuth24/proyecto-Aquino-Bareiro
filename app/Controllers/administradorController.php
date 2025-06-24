@@ -15,7 +15,7 @@ class AdministradorController extends BaseController
 {
     public function administrador()
     {
-        if(!session()->get('isLoggedIn') || session()->get('id_perfil') !== '3') {
+        if (!session()->get('isLoggedIn') || session()->get('id_perfil') !== '3') {
             return redirect()->to('/login')->with('error', 'Acceso no autorizado.');
         }
         $productoModel = new ProductoModel();
@@ -35,6 +35,10 @@ class AdministradorController extends BaseController
 
     public function ventas()
     {
+        if (!session()->get('isLoggedIn') || session()->get('id_perfil') !== '3') {
+            return redirect()->to('/login')->with('error', 'Acceso no autorizado.');
+        }
+
         $ventaModel = new VentaModel();
         $detalleVentaModel = new DetalleVentaModel();
         $productoModel = new ProductoModel();
@@ -54,6 +58,9 @@ class AdministradorController extends BaseController
     }
     public function facturas()
     {
+        if (!session()->get('isLoggedIn') || session()->get('id_perfil') !== '3') {
+            return redirect()->to('/login')->with('error', 'Acceso no autorizado.');
+        }
         $cabeceraModel = new CabeceraModel();
         $facturaModel = new FacturaModel();
         $productoModel = new ProductoModel();

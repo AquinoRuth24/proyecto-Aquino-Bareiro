@@ -54,11 +54,18 @@ class CatalogoController extends BaseController
             'Por temporada' => ['Primavera / Verano', 'Otoño / Invierno'],
             'Por estilo o actividad' => ['Deportivo', 'Urbano', 'Elegante', 'Casual', 'Formal', 'Trabajo', 'Playa'],
         ];
+        // Crear un mapa de [id_categoria => nombre]
+        $categoriasMap = [];
+        foreach ($categorias as $cat) {
+            $categoriasMap[$cat['id_categoria']] = $cat['nombre'];
+        }
+
 
         return view('pages/catalogoProductos', [
             'productos'          => $productos,
             'categorias'         => $categorias,
             'categoriasAgrupadas' => $categoriasAgrupadas,
+            'categoriasMap'     => $categoriasMap,
             'filtros'            => [
                 'nombre'      => $nombre,
                 'categoria'   => $categoria,

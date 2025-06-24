@@ -43,9 +43,12 @@ $actualMethod = service('router')->methodName();
                 <!-- Mostrar "Consultas" solo si el usuario está logueado -->
                 <?php if (session()->get('isLoggedIn')): ?>
                     <li class="nav-item">
-                        <a class="nav-link  <?= ($actualMethod === 'consultas ') ? 'active text-success' : '' ?>"
-                            href="<?= base_url('consultas  ') ?>">Consulta</a>
+                        <a class="nav-link  <?= ($actualMethod === 'consultas') ? 'active text-success' : '' ?>"
+                            href="<?= base_url('consultas') ?>">Consulta</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link  <?= ($actualMethod === 'usuarioLogeado') ? 'active text-success' : '' ?>"
+                            href="<?= base_url('usuarioLogeado') ?>">Usuario</a>
                 <?php endif; ?>
                 <!-- Mostrar "Administración" solo si el usuario es administrador -->
                 <?php if (session()->get('isLoggedIn') && session()->get('id_perfil') === '3'): ?>
