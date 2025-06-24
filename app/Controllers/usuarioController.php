@@ -145,18 +145,32 @@ class UsuarioController extends Controller
         return view('pages/admin/usuarios', ['usuarios' => $usuarios]);
     }
 
-public function facturas()
-{
-    if (!session()->get('isLoggedIn')) {
-        return redirect()->to('/login')->with('error', 'Debes iniciar sesión para ver tus compras');
+    public function facturas()
+    {
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to('/login')->with('error', 'Debes iniciar sesión para ver tus compras');
+        }
+
+        $id_usuario = session()->get('id_usuario');
+
+        $carritoModel = new \App\Models\CarritosModel();
+        $carritos = $carritoModel->where('id_usuario', $id_usuario)->findAll();
+
+        $idsCarrito = array_column($carritos, 'id_carrito');
+
+        $model = new Carrito_compraModel();
+
+        $facturas = [];
+
+        if (!empty($idsCarrito)) {
+            $facturas = $model
+                ->whereIn('id_carrito', $idsCarrito)
+                ->findAll();
+        }
+
+        return view('pages/mis-facturas', [
+            'title' => 'Mis Compras',
+            'facturas' => $facturas
+        ]);
     }
-
-    $id_usuario = session()->get('id_usuario');
-    $carritoCompraModel = new Carrito_compraModel();
-
-    $facturas = $carritoCompraModel->where('id_usuario', $id_usuario)->findAll();
-
-    return view('pages/mis-facturas', ['facturas' => $facturas]);
-}
-
 }
