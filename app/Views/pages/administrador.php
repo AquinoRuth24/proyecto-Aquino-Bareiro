@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <title>Panel Administrador</title>
@@ -10,7 +7,7 @@
     <link rel="icon" href="<?= base_url('public/assets/img/marca.ico') ?>" type="image/x-icon">
 </head>
 
-<body>
+
     <?php if (session()->getFlashdata('message')): ?>
         <div class="alert alert-success"><?= session()->getFlashdata('message') ?></div>
     <?php endif; ?>
@@ -116,6 +113,3 @@
         </div>
     </div>
     <script src="<?= base_url('public/assets/js/bootstrap.js') ?>"></script>
-</body>
-
-</html>

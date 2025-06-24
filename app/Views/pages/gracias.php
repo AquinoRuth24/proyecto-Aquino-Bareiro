@@ -1,22 +1,26 @@
-<!DOCTYPE html>
-<html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Gracias por tu compra</title>
+    <title>Graias Por Su Compra</title>
+    <link href="<?= base_url('public/assets/css/bootstrap.min.css') ?>" rel="stylesheet">
+    <link href="<?= base_url('public/assets/css/miestilo.css') ?>" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" href="<?= base_url('public/assets/img/marca.ico') ?>" type="image/x-icon">
+
 </head>
+<div class="gracias-container">
+    <img src="<?= base_url('public/assets/img/graciasPorSuCompra.png') ?>" alt="Gracias por tu compra">
 
-<body style="text-align:center; padding: 50px;">
-    <img src="<?= base_url('public/assets/img/graciasPorSuCompra.png') ?>"
-        alt="Gracias por tu compra"
-        style="max-width: 30%; height: auto;">
-    <p>Tu pedido ha sido procesado exitosamente. Apreciamos tu confianza en nosotros.</p>   
-    <p>Recibirás un correo de confirmación con los detalles de tu compra.</p>
-    <p>Si tienes alguna pregunta, no dudes en contactarnos.</p>
-    <p>¡Esperamos verte de nuevo pronto!</p>
-    <p>Atentamente,</p>
-    <p>Yesi Yohi Store</p>
-    <p><a href="<?= base_url('/catalogoProductos') ?>">Volver al catálogo</a></p>
-</body>
+    <h3 class="text-success mb-4">¡Tu pedido fue procesado con éxito!</h3>
 
-</html>
+    <p>Gracias por confiar en <strong>Yesi Yohi Store</strong>.</p>
+    <p>Te enviamos un correo con los detalles de la compra.</p>
+    <p>Si tenés alguna pregunta, podés contactarnos desde la sección de consultas.</p>
+
+    <hr class="my-4">
+
+    <p>¡Esperamos verte nuevamente pronto!</p>
+
+    <a href="<?= base_url('/catalogoProductos') ?>" class="btn btn-primary mt-3">
+        Volver al catálogo
+    </a>
+</div>
+<script src="<?= base_url('public/assets/js/bootstrap.js') ?>"></script>

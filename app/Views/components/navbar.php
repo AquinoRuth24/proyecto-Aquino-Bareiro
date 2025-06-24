@@ -49,14 +49,14 @@ $actualMethod = service('router')->methodName();
                     <li class="nav-item">
                         <a class="nav-link  <?= ($actualMethod === 'usuarioLogeado') ? 'active text-success' : '' ?>"
                             href="<?= base_url('usuarioLogeado') ?>">Usuario</a>
-                <?php endif; ?>
-                <!-- Mostrar "Administración" solo si el usuario es administrador -->
-                <?php if (session()->get('isLoggedIn') && session()->get('id_perfil') === '3'): ?>
+                    <?php endif; ?>
+                    <!-- Mostrar "Administración" solo si el usuario es administrador -->
+                    <?php if (session()->get('isLoggedIn') && session()->get('id_perfil') === '3'): ?>
                     <li class="nav-item">
                         <a class="nav-link <?= ($actualMethod === 'administrador') ? 'active text-success' : '' ?>"
                             href="<?= base_url('administrador') ?>">Administración</a>
                     </li>
-                    <?php endif; ?>
+                <?php endif; ?>
             </ul>
 
             <!-- Íconos de usuario y carrito -->
@@ -68,17 +68,32 @@ $actualMethod = service('router')->methodName();
                 </li>
                 <!-- Mostrar nombre de usuario y botón de cerrar sesión si está logueado -->
                 <?php if (session()->get('isLoggedIn')): ?>
-                    <span class="navbar-text text-white me-3">
-                        Hola, <?= session('user_name') ?>!
-                    </span>
-                    <a class="btn btn-outline-light" href="<?= base_url('/logout') ?>">Cerrar sesión</a>
+                    <li class="nav-item">
+                        <a class="nav-link <?= ($actualMethod === 'facturas') ? 'active text-success' : '' ?>"
+                            href="<?= base_url('mis-facturas') ?>">
+                            Mis compras
+                        </a>
+                    </li>
+
+                    <!-- Ícono que redirige al perfil -->
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="<?= base_url('usuarioLogeado') ?>" title="Mi perfil">
+                            <i class="bi bi-person-fill"></i>
+                        </a>
+                    </li>
+                    <!-- Botón de cerrar sesión -->
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light ms-2" href="<?= base_url('/logout') ?>">Cerrar sesión</a>
+                    </li>
                 <?php else: ?>
+                    <!-- Ícono para login si no está logueado -->
                     <li class="nav-item">
                         <a class="nav-link text-white" href="<?= base_url('login') ?>">
                             <i class="bi bi-person-circle"></i>
                         </a>
                     </li>
                 <?php endif; ?>
+
             </ul>
         </div>
     </div>
