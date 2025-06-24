@@ -98,7 +98,7 @@
                 <a href="<?= base_url('catalogoProductos?categoria=' . $cat['id_categoria']) ?>" class="text-decoration-none">
                     <div class="card h-100 shadow-sm">
                         <img src="<?= base_url($imagenesCategorias[$cat['nombre']] ?? 'assets/img/default.jpg') ?>"
-                             class="card-img-top" alt="<?= esc($cat['nombre']) ?>" style="height: 180px; object-fit: cover;">
+                            class="card-img-top" alt="<?= esc($cat['nombre']) ?>" style="height: 180px; object-fit: cover;">
                         <div class="card-body text-center">
                             <h6 class="card-title text-dark mb-0"><?= esc($cat['nombre']) ?></h6>
                         </div>
