@@ -1,28 +1,51 @@
 <?php
 
 namespace App\Controllers;
+
 use App\Models\ProductoModel;
-use App\Models\ImagenModel; 
+use App\Models\ImagenModel;
+use App\Models\CategoriaModel;
 
 class Home extends BaseController
 {
     public function index(): string
     {
-      $productoModel = new ProductoModel();
+        $productoModel = new ProductoModel();
         $imagenModel = new ImagenModel();
+        $categoriaModel = new CategoriaModel();
         // Se obtienen los productos de la base de datos
         $productos = $productoModel->findAll();
         // Se obtienen las imágenes de los productos
         $imagenesBd = $imagenModel->findAll();
+        // Se obtienen las categorías de la base de datos
+        $categorias = $categoriaModel->findAll();
         // Se combinan los productos con sus imágenes
         $imagenes = [];
         foreach ($imagenesBd as $imagen) {
             $imagenes[$imagen['id_producto']][] = $imagen['url_imagen'];
         }
+        // Se definen las categorías a mostrar en la página principal
+        $categoriasMostrar = ['Hombres', 'Mujeres', 'Niños', 'Remeras', 'Buzos', 'Camperas', 'Pantalones', 'Jeans', 'Calzas'];
+        // Se filtran las categorías para mostrar solo las que están en $categoriasMostrar
+        $categoriasFiltradas = array_filter($categorias, function ($cat) use ($categoriasMostrar) {
+            return in_array($cat['nombre'], $categoriasMostrar);
+        });
+
+        $imagenesCategorias = [
+            'Hombres' => 'public/assets/img/Camiseta-Barcelona2.jpg',
+            'Mujeres' => 'public/assets/img/remera-Mujer.jpg',
+            'Niños' => 'public/assets/img/remera-Nino.jpg',
+            'Remeras' => 'public/assets/img/remera-masculina.jpg',
+            'Buzos' => 'public/assets/img/buzo.jpg',
+            'Camperas' => 'public/assets/img/campera-femenina.jpg',
+            'Pantalones' => 'public/assets/img/pantalon-hombre.jpg',
+            'Jeans' => 'public/assets/img/jeans-mujer.jpg',
+            'Calzas' => 'public/assets/img/calza.jpg'
+        ];
 
         return view('templates/main-layout', [
             'title' => 'Principal-Yesi Yohi Store',
-            'content' => view('pages/principal', ['productos' => $productos, 'imagenes' => $imagenes])
+            'content' => view('pages/principal', ['productos' => $productos, 'imagenes' => $imagenes, 'categorias' => $categoriasFiltradas, 'imagenesCategorias' => $imagenesCategorias])
         ]);
     }
     public function quienesSomos(): string

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controllers;
-
+use App\Models\CategoriaModel;
 class Principal extends BaseController
 {
     public function index()
@@ -11,12 +11,16 @@ class Principal extends BaseController
             return redirect()->to('/login')->with('error', 'Por favor, inicie sesión para acceder a esta página.');
         }
 
+        $categoriaModel = new CategoriaModel();
+        $categorias = $categoriaModel->findAll();
+
         return view('templates/main-layout', [
             'title' => 'Bienvenido - Yesi Yohi Store',
             'content' => view('pages/usuarioLogeado', [
                 'nombre' => session('nombre'),
                 'email' => session('email'),
-                'telefono' => session('telefono')
+                'telefono' => session('telefono'),
+                'categorias' => $categorias
             ])
         ]);
     }
