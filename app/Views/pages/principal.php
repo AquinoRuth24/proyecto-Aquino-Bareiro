@@ -13,29 +13,29 @@
             <div class="carousel-inner">
 
                 <?php foreach ($productos as $index => $producto): ?>
-                <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
-                    <div class="d-flex justify-content-center">
-                        <div class="card" style="width: 250px;">
+                    <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
+                        <div class="d-flex justify-content-center">
+                            <div class="card" style="width: 250px;">
 
-                            <!-- Galería de imágenes -->
-                            <?php if (!empty($imagenes[$producto['id_producto']])): ?>
-                            <div class="d-flex flex-wrap justify-content-center">
-                                <?php foreach ($imagenes[$producto['id_producto']] as $imgIndex => $imagen): ?>
-                                <img src="<?= base_url($imagen) ?>" class="m-1 border rounded"
-                                    alt="<?= $producto['nombre'] ?>"
-                                    style="width: 120px; height: 120px; object-fit: cover; cursor: zoom-in;"
-                                    onclick="abrirGaleria(<?= htmlspecialchars(json_encode(array_map('base_url', $imagenes[$producto['id_producto']]))); ?>, <?= $imgIndex ?>)">
-                                <?php endforeach; ?>
+                                <!-- Galería de imágenes -->
+                                <?php if (!empty($imagenes[$producto['id_producto']])): ?>
+                                    <div class="d-flex flex-wrap justify-content-center">
+                                        <?php foreach ($imagenes[$producto['id_producto']] as $imgIndex => $imagen): ?>
+                                            <img src="<?= base_url($imagen) ?>" class="m-1 border rounded"
+                                                alt="<?= $producto['nombre'] ?>"
+                                                style="width: 120px; height: 120px; object-fit: cover; cursor: zoom-in;"
+                                                onclick="abrirGaleria(<?= htmlspecialchars(json_encode(array_map('base_url', $imagenes[$producto['id_producto']]))); ?>, <?= $imgIndex ?>)">
+                                        <?php endforeach; ?>
+                                    </div>
+                                <?php endif; ?>
+
+                                <div class="card-body text-center">
+                                    <h6 class="card-title"><?= esc($producto['nombre']) ?></h6>
+                                </div>
+
                             </div>
-                            <?php endif; ?>
-
-                            <div class="card-body text-center">
-                                <h6 class="card-title"><?= esc($producto['nombre']) ?></h6>
-                            </div>
-
                         </div>
                     </div>
-                </div>
                 <?php endforeach; ?>
 
             </div>
@@ -81,26 +81,26 @@
 
 <!-- Script para galería -->
 <script>
-let galeriaActual = [];
-let indiceActual = 0;
+    let galeriaActual = [];
+    let indiceActual = 0;
 
-function abrirGaleria(imagenes, indice) {
-    galeriaActual = imagenes;
-    indiceActual = indice;
-    mostrarImagen();
-    const modal = new bootstrap.Modal(document.getElementById('imagenModal'));
-    modal.show();
-}
+    function abrirGaleria(imagenes, indice) {
+        galeriaActual = imagenes;
+        indiceActual = indice;
+        mostrarImagen();
+        const modal = new bootstrap.Modal(document.getElementById('imagenModal'));
+        modal.show();
+    }
 
-function mostrarImagen() {
-    const img = document.getElementById('imagenModalSrc');
-    img.src = galeriaActual[indiceActual];
-}
+    function mostrarImagen() {
+        const img = document.getElementById('imagenModalSrc');
+        img.src = galeriaActual[indiceActual];
+    }
 
-function cambiarImagen(direccion) {
-    indiceActual += direccion;
-    if (indiceActual < 0) indiceActual = galeriaActual.length - 1;
-    if (indiceActual >= galeriaActual.length) indiceActual = 0;
-    mostrarImagen();
-}
-</script>                                                                                                                                     
+    function cambiarImagen(direccion) {
+        indiceActual += direccion;
+        if (indiceActual < 0) indiceActual = galeriaActual.length - 1;
+        if (indiceActual >= galeriaActual.length) indiceActual = 0;
+        mostrarImagen();
+    }
+</script>

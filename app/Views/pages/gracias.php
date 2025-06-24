@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-<html lang="es">
+
 
 <head>
     <meta charset="UTF-8">
     <title>Gracias por tu compra</title>
 </head>
 
-<body style="text-align:center; padding: 50px;">
+<div style="text-align:center; padding: 50px;">
     <img src="<?= base_url('public/assets/img/graciasPorSuCompra.png') ?>"
         alt="Gracias por tu compra"
         style="max-width: 30%; height: auto;">
@@ -17,6 +16,4 @@
     <p>Atentamente,</p>
     <p>Yesi Yohi Store</p>
     <p><a href="<?= base_url('/catalogoProductos') ?>">Volver al catálogo</a></p>
-</body>
-
-</html>
+</div>
