@@ -79,7 +79,6 @@ class UsuarioController extends Controller
                 'telefono' => $usuario['telefono'],
                 'isLoggedIn' => true,
             ]);
-            //var_dump(session()->get());
             if ($usuario['id_perfil'] == 3) {
                 return redirect()->to('/administrador')->with('message', 'Bienvenido al panel administrador.');
             } else {

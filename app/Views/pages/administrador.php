@@ -19,7 +19,7 @@
         style="background: linear-gradient(to right, #0f0c29, #302b63, #24243e);">
         <div class="container-fluid">
             <img src="<?= base_url('public/assets/img/marca.jpg') ?>" alt="Logo" height="60" class="me-2">
-            <a class="navbar-brand fw-bold" href="#">ADMIN</a>
+            <a class="navbar-brand fw-bold" href="#"><strong>Administracion:</strong></a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAdmin"
                 aria-controls="navbarAdmin" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +49,7 @@
                 </ul>
                 <ul class="navbar-nav ms-auto d-flex align-items-center flex-row">
                     <span class="navbar-text text-white me-3">
-                        Usuario: <?= session('usuario') ?? 'admin' ?>
+                        Usuario: <?= session('nombre') ?? 'admin' ?>
                     </span>
                     <li class="nav-item">
                         <a class="btn btn-outline-light" href="<?= site_url('logout') ?>">Cerrar sesión</a>
