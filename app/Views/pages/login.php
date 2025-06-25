@@ -31,13 +31,6 @@
                         <label class="form-check-label text-white" for="verPassword">Mostrar contraseña</label>
                     </div>
                 </div>
-                <div class="d-flex justify-content-between mb-3">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="recordarme">
-                        <label class="form-check-label text-white" for="recordarme">Recordar</label>
-                    </div>
-                    <a href="#" class="text-white text-decoration-none">Olvido su contraseña?</a>
-                </div>
 
                 <div class="d-grid mb-3">
                     <button type="submit" class="btn btn-light rounded-pill">Iniciar Sesion</button>
