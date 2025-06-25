@@ -39,26 +39,26 @@ class ConsultaController extends BaseController
                 'contestado' => 0
             ];
 
-            if (session()->has('usuario')) {
-                $data['id_usuario'] = session('usuario')['id_usuario'];
+            if (session()->get('isLoggedIn')) {
+                $data['id_usuario'] = session()->get('user_id');
             } else {
-                // Guardamos nombre y email como datos extra si el usuario no está logueado
                 $data['nombre'] = $this->request->getPost('nombre');
-                $data['email'] = $this->request->getPost('email');
+                $data['email']  = $this->request->getPost('email');
             }
 
             if ($this->consultaModel->insert($data)) {
                 session()->setFlashdata('mensaje', 'Consulta enviada correctamente.');
             } else {
-                session()->setFlashdata('mensaje', 'Error al enviar la consulta. Inténtalo de nuevo.');
+                session()->setFlashdata('mensaje', 'Error al enviar la consulta. Intenta nuevamente.');
             }
         }
 
         return redirect()->to('/consultas');
     }
+
     public function misConsultas()
     {
-        $usuarioId = session()->get('id_usuario');
+        $usuarioId = session()->get('user_id');
         if (!$usuarioId) {
             return redirect()->to('/login')->with('mensaje', 'Debes iniciar sesión para ver tus consultas.');
         }
@@ -73,6 +73,7 @@ class ConsultaController extends BaseController
             'consultas' => $consultas
         ]);
     }
+
 
     public function admin()
     {

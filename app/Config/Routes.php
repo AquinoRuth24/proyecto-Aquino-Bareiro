@@ -29,7 +29,7 @@ $routes->match(['get', 'post'], 'consultas/responder/(:num)', 'ConsultaControlle
 
 //$routes->get('/consultas', 'Home::consultas');
 $routes->get('/consultas', 'ConsultaController::index');
-$routes->post('/consultas/enviar', 'Consultas::enviar');
+$routes->post('/consultas/enviar', 'ConsultaContoller::enviar');
 
 // Formulario de contacto (formulario separado de consultas)
 $routes->post('/contacto/mensaje', 'Home::enviarMensaje');

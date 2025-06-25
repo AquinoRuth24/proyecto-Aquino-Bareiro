@@ -19,21 +19,23 @@
                 <h2 class="card-title text-center mb-4">Formulario de Consultas</h2>
 
                 <form action="<?= base_url('/consultas/enviar') ?>" method="post">
-                    <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre completo</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre"
-                            value="<?= esc(session()->get('nombre') ?? '') ?>"
-                            required minlength="3" maxlength="50"
-                            pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$" placeholder="Ej: María López">
-                    </div>
+                    <?php if (!session()->get('isLoggedIn')): ?>
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre completo</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre"
+                                value="<?= esc(session()->get('nombre') ?? '') ?>"
+                                required minlength="3" maxlength="50"
+                                pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$" placeholder="Ej: María López">
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Correo electrónico</label>
-                        <input type="email" class="form-control" id="email" name="email"
-                            value="<?= esc(session()->get('email') ?? '') ?>"
-                            required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                            maxlength="50" minlength="10" placeholder="Ej: lucas.beltran@gmail.com">
-                    </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Correo electrónico</label>
+                            <input type="email" class="form-control" id="email" name="email"
+                                value="<?= esc(session()->get('email') ?? '') ?>"
+                                required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                maxlength="50" minlength="10" placeholder="Ej: lucas.beltran@gmail.com">
+                        </div>
+                    <?php endif; ?>
 
                     <div class="mb-3">
                         <label for="mensaje" class="form-label">Consulta</label>
