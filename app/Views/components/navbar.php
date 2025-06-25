@@ -28,6 +28,7 @@ $actualMethod = service('router')->methodName();
                     <li class="nav-item"><a class="nav-link <?= ($actualMethod === 'consultas') ? 'active text-success' : '' ?>" href="<?= base_url('consultas') ?>">Consulta</a></li>
                     <li class="nav-item"><a class="nav-link <?= ($actualMethod === 'misConsultas') ? 'active text-success' : '' ?>" href="<?= base_url('mis_consultas') ?>">Mis Consultas</a></li>
                     <li class="nav-item"><a class="nav-link <?= ($actualMethod === 'usuarioLogeado') ? 'active text-success' : '' ?>" href="<?= base_url('usuarioLogeado') ?>">Usuario</a></li>
+                    <li class="nav-item"><a class="nav-link <?= ($actualMethod === 'mis-facturas') ? 'active text-success' : '' ?>" href="<?= base_url('mis-facturas')?>">Mis Facturas</a></li>
                     <!--Administrador-->
                     <?php if (session()->get('id_perfil') === '3'): ?>
                         <li class="nav-item"><a class="nav-link <?= ($actualMethod === 'administrador') ? 'active text-success' : '' ?>" href="<?= base_url('administrador') ?>">Administración</a></li>
