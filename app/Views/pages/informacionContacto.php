@@ -72,7 +72,7 @@
             <div class="card-body">
                 <h2 class="text-center mb-4">Formulario de Mensaje</h2>
 
-                <form action="<?= base_url('/contacto/mensaje') ?>" method="post">
+                <form action="<?= base_url('/contacto/mensaje') ?>" method="POST">
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre completo</label>
                         <input type="text" class="form-control" id="nombre" name="nombre" required
@@ -85,12 +85,6 @@
                         <input type="email" class="form-control" id="email" name="email" required
                             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                             maxlength="50" minlength="10" placeholder="Ej: lucas.beltran@gmail.com">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="telefono" class="form-label">Teléfono (opcional)</label>
-                        <input type="tel" class="form-control" id="telefono" name="telefono" pattern="[0-9]{10}"
-                            title="Número de teléfono válido de 10 dígitos" placeholder="Ej: 3794222684">
                     </div>
 
                     <div class="mb-3">

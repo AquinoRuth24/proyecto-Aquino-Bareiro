@@ -15,85 +15,45 @@ $actualMethod = service('router')->methodName();
 
         <!-- Opciones del menú -->
         <div class="collapse navbar-collapse shadow" id="navbarNav" style="background-color:rgb(39, 38, 39);">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link <?= ($actualMethod === 'index') ? 'active text-success' : '' ?>"
-                        href="<?= base_url() ?>">Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?= ($actualMethod === 'quienesSomos') ? 'active text-success' : '' ?>"
-                        href="<?= base_url('quienesSomos') ?>">Quienes Somos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?= ($actualMethod === 'informacionContacto') ? 'active text-success' : '' ?>"
-                        href="<?= base_url('informacionContacto') ?>">Contacto</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?= ($actualMethod === 'comercializacion') ? 'active text-success' : '' ?>"
-                        href="<?= base_url('comercializacion') ?>">Comercializacion</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?= ($actualMethod === 'terminosYUsos') ? 'active text-success' : '' ?>"
-                        href="<?= base_url('terminosYUsos') ?>">Términos y usos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link  <?= ($actualMethod === 'catalogoProductos') ? 'active text-success' : '' ?>"
-                        href="<?= base_url('catalogoProductos') ?>">Catalago</a>
-                </li>
-                <!-- Mostrar "Consultas" solo si el usuario está logueado -->
+            <!-- Usuario No Logeado -->
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link <?= ($actualMethod === 'index') ? 'active text-success' : '' ?>" href="<?= base_url() ?>">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link <?= ($actualMethod === 'quienesSomos') ? 'active text-success' : '' ?>" href="<?= base_url('quienesSomos') ?>">Quienes Somos</a></li>
+                <li class="nav-item"><a class="nav-link <?= ($actualMethod === 'informacionContacto') ? 'active text-success' : '' ?>" href="<?= base_url('informacionContacto') ?>">Contacto</a></li>
+                <li class="nav-item"><a class="nav-link <?= ($actualMethod === 'comercializacion') ? 'active text-success' : '' ?>" href="<?= base_url('comercializacion') ?>">Comercialización</a></li>
+                <li class="nav-item"><a class="nav-link <?= ($actualMethod === 'terminosYUsos') ? 'active text-success' : '' ?>" href="<?= base_url('terminosYUsos') ?>">Términos y Usos</a></li>
+                <li class="nav-item"><a class="nav-link <?= ($actualMethod === 'catalogoProductos') ? 'active text-success' : '' ?>" href="<?= base_url('catalogoProductos') ?>">Catálogo</a></li>
+                <!--Usuario logeado-->
                 <?php if (session()->get('isLoggedIn')): ?>
-                    <li class="nav-item">
-                        <a class="nav-link  <?= ($actualMethod === 'consultas') ? 'active text-success' : '' ?>"
-                            href="<?= base_url('consultas') ?>">Consulta</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link  <?= ($actualMethod === 'usuarioLogeado') ? 'active text-success' : '' ?>"
-                            href="<?= base_url('usuarioLogeado') ?>">Usuario</a>
+                    <li class="nav-item"><a class="nav-link <?= ($actualMethod === 'consultas') ? 'active text-success' : '' ?>" href="<?= base_url('consultas') ?>">Consulta</a></li>
+                    <li class="nav-item"><a class="nav-link <?= ($actualMethod === 'misConsultas') ? 'active text-success' : '' ?>" href="<?= base_url('mis_consultas') ?>">Mis Consultas</a></li>
+                    <li class="nav-item"><a class="nav-link <?= ($actualMethod === 'usuarioLogeado') ? 'active text-success' : '' ?>" href="<?= base_url('usuarioLogeado') ?>">Usuario</a></li>
+                    <!--Administrador-->
+                    <?php if (session()->get('id_perfil') === '3'): ?>
+                        <li class="nav-item"><a class="nav-link <?= ($actualMethod === 'administrador') ? 'active text-success' : '' ?>" href="<?= base_url('administrador') ?>">Administración</a></li>
                     <?php endif; ?>
-                    <!-- Mostrar "Administración" solo si el usuario es administrador -->
-                    <?php if (session()->get('isLoggedIn') && session()->get('id_perfil') === '3'): ?>
-                    <li class="nav-item">
-                        <a class="nav-link <?= ($actualMethod === 'administrador') ? 'active text-success' : '' ?>"
-                            href="<?= base_url('administrador') ?>">Administración</a>
-                    </li>
                 <?php endif; ?>
             </ul>
 
-            <!-- Íconos de usuario y carrito -->
-            <ul class="navbar-nav ms-auto"><!--ms-auto alinea a la derecha-->
+            <!-- Iconos y sesión -->
+            <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="<?= base_url('carrito') ?>">
-                        <i class="bi bi-cart-fill"></i>
-                    </a>
+                    <a class="nav-link text-white" href="<?= base_url('carrito') ?>"><i class="bi bi-cart-fill"></i></a>
                 </li>
-                <!-- Mostrar nombre de usuario y botón de cerrar sesión si está logueado -->
+                <!--Usuario Logeado-->
                 <?php if (session()->get('isLoggedIn')): ?>
                     <li class="nav-item">
-                        <a class="nav-link <?= ($actualMethod === 'mis-facturas') ? 'active text-success' : '' ?>"
-                            href="<?= base_url('mis-facturas') ?>">
-                            Mis compras
-                        </a>
+                        <a class="nav-link text-white" href="<?= base_url('usuarioLogeado') ?>"><i class="bi bi-person-fill"></i></a>
                     </li>
-
-                    <!-- Ícono que redirige al perfil -->
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="<?= base_url('usuarioLogeado') ?>" title="Mi perfil">
-                            <i class="bi bi-person-fill"></i>
-                        </a>
-                    </li>
-                    <!-- Botón de cerrar sesión -->
                     <li class="nav-item">
                         <a class="btn btn-outline-light ms-2" href="<?= base_url('/logout') ?>">Cerrar sesión</a>
                     </li>
                 <?php else: ?>
-                    <!-- Ícono para login si no está logueado -->
+                    <!--NO logeado-->
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="<?= base_url('login') ?>">
-                            <i class="bi bi-person-circle"></i>
-                        </a>
+                        <a class="nav-link text-white" href="<?= base_url('login') ?>"><i class="bi bi-person-circle"></i></a>
                     </li>
                 <?php endif; ?>
-
             </ul>
         </div>
     </div>

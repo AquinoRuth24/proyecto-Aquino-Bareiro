@@ -20,19 +20,17 @@ $routes->get('/registrar', 'Home::registrar');
 $routes->get('/consulta', 'ConsultaController::index');
 $routes->post('/consultas/enviar', 'ConsultaController::enviar');
 $routes->get('mis_consultas', 'ConsultaController::misConsultas');
-
-// Consultas de usuarios (página de administración)
+$routes->match(['get', 'post'], 'consultas/verRespuesta', 'ConsultaController::verRespuesta');
+$routes->match(['get', 'post'], 'consultas/responder/(:num)', 'ConsultaController::responder/$1');
 $routes->get('admin/consultas', 'ConsultaController::admin');
 $routes->get('consultas/marcarContestado/(:num)', 'ConsultaController::marcarContestado/$1');
-$routes->match(['get', 'post'], 'consultas/responder/(:num)', 'ConsultaController::responder/$1');
+$routes->post('contacto/mensaje', 'ConsultaController::enviar');
+
 
 
 //$routes->get('/consultas', 'Home::consultas');
 $routes->get('/consultas', 'ConsultaController::index');
 $routes->post('/consultas/enviar', 'ConsultaContoller::enviar');
-
-// Formulario de contacto (formulario separado de consultas)
-$routes->post('/contacto/mensaje', 'Home::enviarMensaje');
 
 // Autenticación
 $routes->match(['get', 'post'], '/login', 'UsuarioController::login');

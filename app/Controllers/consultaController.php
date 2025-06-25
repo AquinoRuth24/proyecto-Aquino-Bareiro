@@ -40,10 +40,24 @@ class ConsultaController extends BaseController
             ];
 
             if (session()->get('isLoggedIn')) {
-                $data['id_usuario'] = session()->get('user_id');
+                $userId = session()->get('user_id');
+
+                // Validar que sea un ID existente si querés (opcional)
+                if (!empty($userId) && is_numeric($userId)) {
+                    $data['id_usuario'] = $userId;
+                }
             } else {
-                $data['nombre'] = $this->request->getPost('nombre');
-                $data['email']  = $this->request->getPost('email');
+                // Para usuarios no registrados: nombre y email
+                $nombre = $this->request->getPost('nombre');
+                $email  = $this->request->getPost('email');
+
+                if (empty($nombre) || empty($email)) {
+                    session()->setFlashdata('mensaje', 'Nombre y email son obligatorios para enviar la consulta.');
+                    return redirect()->to('/consultas');
+                }
+
+                $data['nombre'] = $nombre;
+                $data['email']  = $email;
             }
 
             if ($this->consultaModel->insert($data)) {
@@ -99,7 +113,7 @@ class ConsultaController extends BaseController
     {
         $this->consultaModel->update($id, ['contestado' => 1]);
 
-        return redirect()->to(site_url('pages/admin/consultas'))->with('mensaje', 'Consulta marcada como contestada.');
+        return redirect()->to(site_url('admin/consultas'))->with('mensaje', 'Consulta marcada como contestada.');
     }
     public function responder($id)
     {
@@ -111,14 +125,32 @@ class ConsultaController extends BaseController
                 'contestado' => 1
             ]);
 
-            return redirect()->to(site_url('pages/admin/consultas'))->with('mensaje', 'Consulta respondida correctamente.');
+            return redirect()->to(site_url('admin/consultas'))->with('mensaje', 'Consulta respondida correctamente.');
         }
 
-        $consultas = $this->consultaModel->find($id);
+        $consulta = $this->consultaModel->find($id);
 
         return view('pages/admin/responder_consulta', [
             'title' => 'Responder Consulta',
-            'consultas' => $consultas
+            'consulta' => $consulta
         ]);
+    }
+    public function verRespuesta()
+    {
+        if ($this->request->getMethod() === 'post') {
+            $email = $this->request->getPost('email');
+
+            $consultas = $this->consultaModel
+                ->where('email', $email)
+                ->where('contestado', 1)
+                ->orderBy('fecha_envio', 'DESC')
+                ->findAll();
+
+            return view('pages/consultas_no_logueado', [
+                'title' => 'Respuestas a tus Consultas',
+                'consultas' => $consultas,
+                'email' => $email
+            ]);
+        }
     }
 }

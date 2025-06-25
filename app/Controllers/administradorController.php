@@ -5,8 +5,6 @@ namespace App\Controllers;
 use App\Models\CabeceraModel;
 use App\Models\FacturaModel;
 use App\Models\ProductoModel;
-use App\Models\VentaModel;
-use App\Models\DetalleVentaModel;
 use App\Models\UsuarioModel;
 use App\Models\ImagenModel;
 
@@ -153,4 +151,5 @@ class AdministradorController extends BaseController
 
         return redirect()->to('/admin/facturas')->with('mensaje', 'Venta registrada correctamente.');
     }
+
 }

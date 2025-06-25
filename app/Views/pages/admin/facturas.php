@@ -7,7 +7,6 @@
     <link rel="icon" href="<?= base_url('public/assets/img/marca.ico') ?>" type="image/x-icon">
 
 </head>
-<!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark"
     style="background: linear-gradient(to right, #0f0c29, #302b63, #24243e);">
     <div class="container-fluid">
@@ -22,7 +21,7 @@
         <div class="collapse navbar-collapse" id="navbarAdmin">
             <ul class="navbar-nav me-auto d-flex flex-row">
                 <li class="nav-item me-3">
-                    <a class="nav-link" href="<?= site_url('principal') ?>">Home</a>
+                    <a class="nav-link" href="<?= site_url('administrador') ?>">Home</a>
                 </li>
                 <li class="nav-item me-3">
                     <a class="nav-link" href="<?= site_url('usuario') ?>">Usuarios</a>
@@ -51,63 +50,81 @@
         </div>
     </div>
 </nav>
-<div class="container mt-4 p-3 rounded" style="background-color: darkgray;">
-    <div class="d-flex justify-content-between align-items-center position-relative">
-        <div style="width: 150px;"></div>
-        <h2 class="mb-0 text-center flex-grow-1">Facturas De Clientes</h2>
-        <a href="<?= site_url('administrador') ?>" class="btn btn-primary">
-            <i class="bi bi-arrow-left-circle"></i> Volver
-        </a>
-    </div>
-</div>
-<div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="mb-0" style="font-size: 2rem;">Facturas del Día</h2>
-        <span class="text-muted" style="font-size: 1.5rem;"><?= date('d/m/Y') ?></span>
-    </div>
-
-    <!-- FILTROS -->
-    <form method="get" class="row g-3 mb-4">
-        <div class="col-md-4">
-            <label class="form-label">Fecha</label>
-            <input type="date" name="fecha" class="form-control" value="<?= esc($fecha) ?>">
-        </div>
-
-        <div class="col-md-4">
-            <label class="form-label">Cliente</label>
-            <select name="cliente" class="form-select">
-                <option value="">Todos</option>
-                <?php foreach ($usuarios as $usuario): ?>
-                    <option value="<?= $usuario['id_usuario'] ?>" <?= $clienteSeleccionado == $usuario['id_usuario'] ? 'selected' : '' ?>>
-                        <?= esc($usuario['nombre']) ?> (<?= esc($usuario['email']) ?>)
-                    </option>
-                <?php endforeach; ?>
-            </select>
-        </div>
-
-        <div class="col-md-4 d-flex align-items-end">
-            <button type="submit" class="btn btn-primary w-100">Filtrar</button>
-        </div>
-    </form>
-</div>
-
-<?php foreach ($cabeceras as $cabecera): ?>
-    <div class="card mb-4">
-        <div class="card-header bg-dark text-white">
-            Factura N° <?= $cabecera['id_cabecera'] ?> | Usuario: <?= $cabecera['usuario']['usuario'] ?? 'Desconocido' ?> | Fecha: <?= $cabecera['fecha_creacion'] ?>
-        </div>
-        <div class="card-body">
-            <ul>
-                <?php foreach ($cabecera['facturas'] as $factura): ?>
-                    <li>
-                        <?= $factura['producto'] ?> - Cantidad: <?= $factura['cantidad'] ?> - Precio: $<?= $factura['precio_unitario'] ?> - Subtotal: $<?= $factura['subtotal'] ?>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-            <div class="text-end fw-bold">
-                Total: $<?= $cabecera['precio_total'] ?>
+<div class="container mt-5">
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body py-3 px-4" style="background-color: #b3b3b3; border-radius: 0.5rem;">
+            <div class="d-flex justify-content-between align-items-center">
+                <h4 class="text-center flex-grow-1 mb-0 text-dark" style="font-weight: 600;">Facturas De Clientes</h4>
+                <a href="<?= site_url('administrador') ?>" class="btn btn-primary rounded">
+                    <i class="bi bi-arrow-left-circle"></i> Volver
+                </a>
             </div>
         </div>
     </div>
-<?php endforeach; ?>
+
+    <form method="get" class="card card-body shadow-sm mb-4 border-light">
+        <div class="row g-3">
+            <div class="col-md-4">
+                <label class="form-label fw-semibold">Fecha</label>
+                <input type="date" name="fecha" class="form-control" value="<?= esc($fecha) ?>">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label fw-semibold">Cliente</label>
+                <select name="cliente" class="form-select">
+                    <option value="">Todos</option>
+                    <?php foreach ($usuarios as $usuario): ?>
+                        <option value="<?= $usuario['id_usuario'] ?>" <?= $clienteSeleccionado == $usuario['id_usuario'] ? 'selected' : '' ?>>
+                            <?= esc($usuario['nombre']) ?> (<?= esc($usuario['email']) ?>)
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="col-md-4 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="bi bi-search"></i> Filtrar
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <?php if (empty($cabeceras)): ?>
+        <div class="alert alert-info text-center">No se encontraron facturas para los filtros aplicados.</div>
+    <?php endif; ?>
+
+    <?php foreach ($cabeceras as $cabecera): ?>
+        <div class="card mb-4 shadow-sm border-light">
+            <div class="card-header bg-dark text-white">
+                Factura N° <?= $cabecera['id_cabecera'] ?> | Usuario: <?= $cabecera['usuario']['usuario'] ?? 'Desconocido' ?> | Fecha: <?= date('d/m/Y H:i', strtotime($cabecera['fecha_creacion'])) ?>
+            </div>
+            <div class="card-body bg-light p-0">
+                <div class="table-responsive">
+                    <table class="table table-bordered m-0 text-center align-middle">
+                        <thead class="table-dark text-white">
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio Unitario</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($cabecera['facturas'] as $factura): ?>
+                                <tr>
+                                    <td><?= esc($factura['producto']) ?></td>
+                                    <td><?= $factura['cantidad'] ?></td>
+                                    <td>$<?= number_format($factura['precio_unitario'], 2, ',', '.') ?></td>
+                                    <td class="fw-semibold text-end">$<?= number_format($factura['subtotal'], 2, ',', '.') ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="p-3 text-end fw-bold text-dark fs-5">
+                    Total: $<?= number_format($cabecera['precio_total'], 2, ',', '.') ?>
+                </div>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>
+
 <script src="<?= base_url('public/assets/js/bootstrap.min.js') ?>"></script>

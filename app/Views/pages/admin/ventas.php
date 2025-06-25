@@ -23,7 +23,7 @@
         <div class="collapse navbar-collapse" id="navbarAdmin">
             <ul class="navbar-nav me-auto d-flex flex-row">
                 <li class="nav-item me-3">
-                    <a class="nav-link" href="<?= site_url('principal') ?>">Home</a>
+                    <a class="nav-link" href="<?= site_url('administrador') ?>">Home</a>
                 </li>
                 <li class="nav-item me-3">
                     <a class="nav-link" href="<?= site_url('usuario') ?>">Usuarios</a>
@@ -61,43 +61,64 @@
         </a>
     </div>
 </div>
+
 <div class="container mt-5">
-    <table class="table table-bordered table-striped table-hover text-center">
-        <thead class="table-primary">
-            <tr>
-                <th>ID Venta</th>
-                <th>Fecha</th>
-                <th>Detalle</th>
-                <th>Total</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($ventas as $venta): ?>
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body py-3 px-4" style="background-color: #b3b3b3; border-radius: 0.5rem;">
+            <div class="d-flex justify-content-between align-items-center">
+                <h4 class="text-center flex-grow-1 mb-0 text-dark" style="font-weight: 600;">Listado de Ventas</h4>
+                <a href="<?= site_url('administrador') ?>" class="btn btn-primary rounded">
+                    <i class="bi bi-arrow-left-circle"></i> Volver
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered align-middle text-center shadow-sm">
+            <thead class="table-dark text-white">
                 <tr>
-                    <td><?= $venta['id_cabecera'] ?></td>
-                    <td><?= date('d/m/Y H:i', strtotime($venta['fecha_creacion'])) ?></td>
-                    <td>
-                        <?= esc($venta['usuario']['nombre'] . ' ' . $venta['usuario']['apellido']) ?><br>
-                        <small><?= esc($venta['usuario']['email']) ?></small>
-                    </td>
-                    <td class="text-start">
-                        <ul class="mb-0">
-                            <?php foreach ($venta['facturas'] as $detalle): ?>
-                                <li>
-                                    <strong><?= esc($detalle['producto']) ?></strong> |
-                                    Cant: <?= $detalle['cantidad'] ?> |
-                                    Precio: $<?= number_format($detalle['precio_unitario'], 2, ',', '.') ?>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </td>
-                    <td>
-                        $<?= number_format($venta['precio_total'], 2, ',', '.') ?>
-                    </td>
+                    <th>ID Venta</th>
+                    <th>Fecha</th>
+                    <th>Cliente</th>
+                    <th>Detalle</th>
+                    <th>Total</th>
                 </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php if (empty($ventas)): ?>
+                    <tr>
+                        <td colspan="5" class="text-center text-muted">No hay ventas registradas.</td>
+                    </tr>
+                <?php else: ?>
+                    <?php foreach ($ventas as $venta): ?>
+                        <tr>
+                            <td class="fw-semibold"><?= $venta['id_cabecera'] ?></td>
+                            <td><?= date('d/m/Y H:i', strtotime($venta['fecha_creacion'])) ?></td>
+                            <td>
+                                <?= esc($venta['usuario']['nombre']) ?> <?= esc($venta['usuario']['apellido']) ?><br>
+                                <small class="text-muted"><?= esc($venta['usuario']['email']) ?></small>
+                            </td>
+                            <td class="text-start">
+                                <ul class="mb-0 list-unstyled">
+                                    <?php foreach ($venta['facturas'] as $detalle): ?>
+                                        <li>
+                                            <strong><?= esc($detalle['producto']) ?></strong> |
+                                            Cant: <?= $detalle['cantidad'] ?> |
+                                            Precio: $<?= number_format($detalle['precio_unitario'], 2, ',', '.') ?>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </td>
+                            <td class="fw-bold text-success">
+                                $<?= number_format($venta['precio_total'], 2, ',', '.') ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <script src="<?= base_url('public/assets/js/bootstrap.min.js') ?>"></script>

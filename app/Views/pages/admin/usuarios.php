@@ -21,7 +21,7 @@
         <div class="collapse navbar-collapse" id="navbarAdmin">
             <ul class="navbar-nav me-auto d-flex flex-row">
                 <li class="nav-item me-3">
-                    <a class="nav-link" href="<?= site_url('principal') ?>">Home</a>
+                    <a class="nav-link" href="<?= site_url('administrador') ?>">Home</a>
                 </li>
                 <li class="nav-item me-3">
                     <a class="nav-link" href="<?= site_url('usuario') ?>">Usuarios</a>
