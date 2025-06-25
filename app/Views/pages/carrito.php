@@ -29,7 +29,7 @@
                         <td><?= esc($item['cantidad']) ?></td>
                         <td>$<?= number_format($subtotal, 2) ?></td>
                         <td>
-                            <a href="<?= base_url('carrito/eliminar/'.$item['id']) ?>" class="btn btn-danger btn-sm">Eliminar</a>
+                            <a href="<?= base_url('carrito/eliminar/' . $item['id']) ?>" class="btn btn-danger btn-sm">Eliminar</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -40,7 +40,9 @@
             </tbody>
         </table>
         <a href="<?= base_url('carrito/vaciar') ?>" class="btn btn-warning">Vaciar carrito</a>
-        <a href="<?= base_url('pages/gracias') ?>" class="btn btn-success">Finalizar compra</a>
+        <form action="<?= base_url('carrito/terminarCompra') ?>" method="POST" style="display:inline;">
+            <button type="submit" class="btn btn-success">Finalizar compra</button>
+        </form>
         <a href="<?= base_url('mi-historial') ?>" class="btn btn-info">Ver historial de compras</a>
     <?php endif; ?>
 

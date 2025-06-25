@@ -2,7 +2,7 @@
 
 <?= $this->section('contenido') ?>
 <div class="container mt-5">
-    <h2>Mis compras</h2>
+    <h2>Mis facturas</h2>
 
     <?php if (empty($facturas)): ?>
         <p>No tenés compras registradas todavía.</p>
@@ -18,9 +18,9 @@
             <tbody>
                 <?php foreach ($facturas as $compra): ?>
                     <tr>
-                        <td><?= $compra['id'] ?? $compra['id_compra'] ?></td>
-                        <td><?= $compra['fecha'] ?? '---' ?></td>
-                        <td>$<?= number_format($compra['total'], 2) ?></td>
+                        <td><?= $compra['id_cabecera'] ?></td>
+                        <td><?= $compra['fecha_creacion'] ?></td>
+                        <td>$<?= number_format($compra['precio_total'], 2) ?></td>
                     </tr>
                 <?php endforeach ?>
             </tbody>

@@ -71,53 +71,9 @@ class CarritoController extends Controller
         ]);
     }
 
-    public function comprar()
-    {
-        if (!session()->has('id_usuario')) {
-            session()->setFlashdata('redirect_after_login', 'carrito');
-            return redirect()->to('/login')->with('error', 'Debes iniciar sesión para finalizar la compra');
-        }
-
-        $carrito = $this->session->get('carrito');
-        if (!$carrito) {
-            return redirect()->back()->with('error', 'El carrito está vacío');
-        }
-
-        $carritosModel = new CarritosModel();
-        $carritoCompraModel = new Carrito_compraModel();
-        $productoModel = new ProductoModel();
-
-        $id_usuario = session('id_usuario');
-
-        $id_carrito = $carritosModel->insert([
-            'id_usuario' => $id_usuario,
-            'fecha_creado' => date('Y-m-d H:i:s')
-        ]);
-
-        foreach ($carrito as $item) {
-            $producto = $productoModel->find($item['id']);
-            if ($producto && $producto['stock'] >= $item['cantidad']) {
-                $nuevoStock = $producto['stock'] - $item['cantidad'];
-                $productoModel->update($item['id'], ['stock' => $nuevoStock]);
-
-                $carritoCompraModel->insert([
-                    'id_carrito' => $id_carrito,
-                    'id_producto' => $item['id'],
-                    'cantidad' => $item['cantidad'],
-                    'precio_unitario' => $item['precio'],
-                    'precio_total' => $item['precio'] * $item['cantidad']
-                ]);
-            }
-        }
-
-        $this->session->remove('carrito');
-
-        return view('pages/gracias');
-    }
-
     public function gracias()
     {
-        return view('pages/gracias',[
+        return view('pages/gracias', [
             'title' => 'Gracias por su compra',
         ]);
     }
@@ -145,6 +101,59 @@ class CarritoController extends Controller
         return view('pages/historial', [
             'title' => 'Historial de Compras',
             'historial' => $historial
+        ]);
+    }
+    public function terminarCompra()
+    {
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to('/login')->with('error', 'Debés iniciar sesión para finalizar la compra.');
+        }
+
+        $carrito = $this->session->get('carrito');
+
+        if (empty($carrito)) {
+            return redirect()->to('/carrito')->with('error', 'El carrito está vacío.');
+        }
+
+        $idUsuario = session()->get('user_id');
+        $cabeceraModel = new \App\Models\CabeceraModel();
+        $facturaModel = new \App\Models\FacturaModel();
+        $productoModel = new \App\Models\ProductoModel();
+
+        $total = 0;
+        foreach ($carrito as $item) {
+            $total += $item['precio'] * $item['cantidad'];
+        }
+
+        // Insertar cabecera
+        $idCabecera = $cabeceraModel->insert([
+            'id_usuario' => $idUsuario,
+            'fecha_creacion' => date('Y-m-d H:i:s'),
+            'precio_total' => $total
+        ], true); // true para retornar el ID
+
+        // Insertar detalle de la factura por producto
+        foreach ($carrito as $item) {
+            $facturaModel->insert([
+                'id_producto' => $item['id'],
+                'cantidad' => $item['cantidad'],
+                'precio_unitario' => $item['precio'],
+                'descuento' => 0,
+                'subtotal' => $item['precio'] * $item['cantidad'],
+                'id_cabecera' => $idCabecera
+            ]);
+
+            $producto = $productoModel->find($item['id']);
+            if ($producto) {
+                $nuevoStock = $producto['stock'] - $item['cantidad'];
+                $productoModel->update($item['id'], ['stock' => $nuevoStock]);
+            }
+        }
+
+        $this->session->remove('carrito');
+
+        return view('pages/gracias', [
+            'title' => 'Gracias por su compra',
         ]);
     }
 }

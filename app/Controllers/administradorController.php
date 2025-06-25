@@ -35,62 +35,72 @@ class AdministradorController extends BaseController
 
     public function ventas()
     {
+        // Verifica que sea administrador (perfil 3)
         if (!session()->get('isLoggedIn') || session()->get('id_perfil') !== '3') {
             return redirect()->to('/login')->with('error', 'Acceso no autorizado.');
         }
 
-        $ventaModel = new VentaModel();
-        $detalleVentaModel = new DetalleVentaModel();
-        $productoModel = new ProductoModel();
+        $cabeceraModel = new \App\Models\CabeceraModel();
+        $facturaModel = new \App\Models\FacturaModel();
+        $productoModel = new \App\Models\ProductoModel();
+        $usuarioModel = new \App\Models\UsuarioModel();
 
-        $ventas = $ventaModel->findAll();
+        // Trae todas las ventas (cabeceras de factura)
+        $ventas = $cabeceraModel->orderBy('fecha_creacion', 'DESC')->findAll();
 
+        // Por cada cabecera, busca el usuario y los productos facturados
         foreach ($ventas as &$venta) {
-            $venta['detalles'] = $detalleVentaModel->where('id_venta', $venta['id'])->findAll();
+            $venta['usuario'] = $usuarioModel->find($venta['id_usuario']);
 
-            foreach ($venta['detalles'] as &$detalle) {
-                $producto = $productoModel->find($detalle['id_producto']);
-                $detalle['producto'] = $producto ? $producto['nombre'] : 'Producto no encontrado';
+            $facturas = $facturaModel->where('id_cabecera', $venta['id_cabecera'])->findAll();
+
+            foreach ($facturas as &$factura) {
+                $producto = $productoModel->find($factura['id_producto']);
+                $factura['producto'] = $producto ? $producto['nombre'] : 'Producto eliminado';
             }
+
+            $venta['facturas'] = $facturas;
         }
 
         return view('pages/admin/ventas', ['ventas' => $ventas]);
     }
     public function facturas()
     {
+        // Verificación de acceso solo para administradores (perfil 3)
         if (!session()->get('isLoggedIn') || session()->get('id_perfil') !== '3') {
             return redirect()->to('/login')->with('error', 'Acceso no autorizado.');
         }
+
         $cabeceraModel = new CabeceraModel();
         $facturaModel = new FacturaModel();
         $productoModel = new ProductoModel();
         $usuarioModel = new UsuarioModel();
 
-        // Obtener filtros del formulario
+        // Filtros GET desde el formulario
         $fecha = $this->request->getGet('fecha');
         $cliente = $this->request->getGet('cliente');
 
         $builder = $cabeceraModel;
 
-        // Filtro por fecha (yyyy-mm-dd)
+
         if (!empty($fecha)) {
             $builder = $builder->where('DATE(fecha_creacion)', $fecha);
-        } else {
-            // Por defecto: solo las de hoy
-            $builder = $builder->where('DATE(fecha_creacion)', date('Y-m-d'));
         }
 
-        // Filtro por cliente
+
         if (!empty($cliente)) {
             $builder = $builder->where('id_usuario', $cliente);
         }
 
-        $cabeceras = $builder->findAll();
+
+        $cabeceras = $builder->orderBy('fecha_creacion', 'DESC')->findAll();
 
         foreach ($cabeceras as &$cabecera) {
+
             $cabecera['usuario'] = $usuarioModel->find($cabecera['id_usuario']);
 
             $facturas = $facturaModel->where('id_cabecera', $cabecera['id_cabecera'])->findAll();
+
             foreach ($facturas as &$factura) {
                 $producto = $productoModel->find($factura['id_producto']);
                 $factura['producto'] = $producto ? $producto['nombre'] : 'Producto eliminado';
@@ -98,8 +108,6 @@ class AdministradorController extends BaseController
 
             $cabecera['facturas'] = $facturas;
         }
-
-        // Pasamos los usuarios para el filtro por cliente
         $usuarios = $usuarioModel->findAll();
 
         return view('pages/admin/facturas', [
@@ -108,5 +116,41 @@ class AdministradorController extends BaseController
             'fecha' => $fecha,
             'clienteSeleccionado' => $cliente
         ]);
+    }
+    private function verificarAcceso()
+    {
+        if (!session()->get('isLoggedIn') || session()->get('id_perfil') !== '3') {
+            redirect()->to('/login')->with('error', 'Acceso no autorizado.')->send();
+            exit;
+        }
+    }
+    public function registrarVenta()
+    {
+        $this->verificarAcceso();
+
+        $cabeceraModel = new \App\Models\CabeceraModel();
+        $facturaModel = new \App\Models\FacturaModel();
+
+        $id_usuario = 1;
+        $fecha = date('Y-m-d H:i:s');
+
+        $cabeceraModel->insert([
+            'id_usuario' => $id_usuario,
+            'fecha_creacion' => $fecha,
+            'precio_total' => 15000
+        ]);
+
+        $id_cabecera = $cabeceraModel->insertID();
+
+        $facturaModel->insert([
+            'id_cabecera' => $id_cabecera,
+            'id_producto' => 1,
+            'cantidad' => 1,
+            'precio_unitario' => 15000.00,
+            'descuento' => 0,
+            'subtotal' => 15000.00
+        ]);
+
+        return redirect()->to('/admin/facturas')->with('mensaje', 'Venta registrada correctamente.');
     }
 }

@@ -32,7 +32,7 @@ class ConsultaController extends BaseController
 
     public function enviar()
     {
-        if ($this->request->getMethod() === 'post') {
+        if ($this->request->getMethod() === 'POST') {
             $data = [
                 'mensaje' => $this->request->getPost('mensaje'),
                 'fecha_envio' => date('Y-m-d H:i:s'),

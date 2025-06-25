@@ -74,21 +74,25 @@
         <tbody>
             <?php foreach ($ventas as $venta): ?>
                 <tr>
-                    <td><?= $venta['id'] ?></td>
-                    <td><?= $venta['fecha'] ?></td>
+                    <td><?= $venta['id_cabecera'] ?></td>
+                    <td><?= date('d/m/Y H:i', strtotime($venta['fecha_creacion'])) ?></td>
+                    <td>
+                        <?= esc($venta['usuario']['nombre'] . ' ' . $venta['usuario']['apellido']) ?><br>
+                        <small><?= esc($venta['usuario']['email']) ?></small>
+                    </td>
                     <td class="text-start">
                         <ul class="mb-0">
-                            <?php foreach ($venta['detalles'] as $detalle): ?>
+                            <?php foreach ($venta['facturas'] as $detalle): ?>
                                 <li>
                                     <strong><?= esc($detalle['producto']) ?></strong> |
                                     Cant: <?= $detalle['cantidad'] ?> |
-                                    Precio: $<?= $detalle['precio_unitario'] ?>
+                                    Precio: $<?= number_format($detalle['precio_unitario'], 2, ',', '.') ?>
                                 </li>
                             <?php endforeach; ?>
                         </ul>
                     </td>
                     <td>
-                        $<?= number_format($venta['total'], 2, ',', '.') ?>
+                        $<?= number_format($venta['precio_total'], 2, ',', '.') ?>
                     </td>
                 </tr>
             <?php endforeach; ?>

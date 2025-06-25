@@ -69,7 +69,7 @@ $actualMethod = service('router')->methodName();
                 <!-- Mostrar nombre de usuario y botón de cerrar sesión si está logueado -->
                 <?php if (session()->get('isLoggedIn')): ?>
                     <li class="nav-item">
-                        <a class="nav-link <?= ($actualMethod === 'facturas') ? 'active text-success' : '' ?>"
+                        <a class="nav-link <?= ($actualMethod === 'mis-facturas') ? 'active text-success' : '' ?>"
                             href="<?= base_url('mis-facturas') ?>">
                             Mis compras
                         </a>

@@ -17,7 +17,7 @@ $routes->get('/terminosYUsos', 'Home::terminosYUsos');
 $routes->get('/registrar', 'Home::registrar');
 
 // Consultas
-$routes->get('/consulta', 'ConsultaController::index'); 
+$routes->get('/consulta', 'ConsultaController::index');
 $routes->post('/consultas/enviar', 'ConsultaController::enviar');
 $routes->get('mis_consultas', 'ConsultaController::misConsultas');
 
@@ -28,7 +28,7 @@ $routes->match(['get', 'post'], 'consultas/responder/(:num)', 'ConsultaControlle
 
 
 //$routes->get('/consultas', 'Home::consultas');
-$routes->get('/consultas', 'ConsultaController::index'); 
+$routes->get('/consultas', 'ConsultaController::index');
 $routes->post('/consultas/enviar', 'Consultas::enviar');
 
 // Formulario de contacto (formulario separado de consultas)
@@ -70,9 +70,11 @@ $routes->get('catalogoProductos', 'CatalogoController::index');
 $routes->get('carrito', 'CarritoController::ver');
 $routes->get('carrito/agregar/(:num)', 'CarritoController::agregar/$1');
 $routes->get('carrito/eliminar/(:num)', 'CarritoController::eliminar/$1');
-$routes->get('/mis-facturas', 'usuarioController::facturas');
+$routes->get('mis-facturas', 'UsuarioController::misFacturas');
+
 
 $routes->get('carrito/vaciar', 'CarritoController::vaciar');
-//$routes->get('carrito/comprar', 'CarritoController::comprar');
 $routes->get('pages/gracias', 'CarritoController::gracias');
 $routes->get('mi-historial', 'CarritoController::historial');
+$routes->post('carrito/terminarCompra', 'CarritoController::terminarCompra');
+$routes->get('admin/registrar-venta', 'AdministradorController::registrarVenta');
